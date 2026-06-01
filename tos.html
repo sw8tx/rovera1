@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="logo.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Service — Rovera</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #050505;
+    --white: #e8e8e8;
+    --blue: #2a4fa0;
+    --grey: #555;
+    --border: #1a1a1a;
+    --section-bg: #0d0d0d;
+  }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  /* Nav */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(5,5,5,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 48px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: var(--white);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 28px;
+  }
+
+  .nav-links a {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--grey);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover,
+  .nav-links a.active { color: #2a4fa0; }
+
+  /* Layout */
+  .page-wrap {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 72px 24px 120px;
+  }
+
+  .page-header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 40px;
+    margin-bottom: 60px;
+  }
+
+  .page-tag {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: #2a4fa0;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 56px;
+    letter-spacing: 0.04em;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .page-meta {
+    font-size: 11px;
+    color: var(--grey);
+    letter-spacing: 0.1em;
+  }
+
+  /* Sections */
+  .section {
+    margin-bottom: 48px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section:last-child {
+    border-bottom: none;
+  }
+
+  h2 {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  h2::before {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 1px;
+    background: #2a4fa0;
+  }
+
+  p {
+    color: #888;
+    margin-bottom: 14px;
+  }
+
+  p:last-child { margin-bottom: 0; }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 14px;
+  }
+
+  ul li {
+    color: #888;
+    padding: 4px 0 4px 20px;
+    position: relative;
+  }
+
+  ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: #333;
+  }
+
+  strong {
+    color: var(--white);
+    font-weight: 700;
+  }
+
+  .highlight-box {
+    background: var(--section-bg);
+    border: 1px solid var(--border);
+    border-left: 2px solid #2a4fa0;
+    padding: 20px 24px;
+    margin: 20px 0;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .highlight-box p {
+    margin: 0;
+  }
+
+  /* Footer */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    color: #222;
+    text-decoration: none;
+    letter-spacing: 0.06em;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 24px;
+  }
+
+  .footer-links a {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--grey);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: #2a4fa0; }
+  .copyright-bar { text-align: center; font-size: 10px; color: #4a5580; letter-spacing: 0.05em; padding: 16px 24px; border-top: 1px solid #111; background: #030303; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/index.html" class="nav-logo">ROVERA</a>
+  <div class="nav-links">
+    <a href="/tos.html" class="active">Terms of Service</a>
+    <a href="/privacy.html">Privacy Policy</a>
+  </div>
+</nav>
+
+<div class="page-wrap">
+  <div class="page-header">
+    <div class="page-tag">Legal</div>
+    <h1>Terms of Service</h1>
+    <div class="page-meta">Last Updated: May 2026 &nbsp;·&nbsp; Rovera.xyz &nbsp;·&nbsp; help@rovera.xyz</div>
+  </div>
+
+  <div class="section">
+    <h2>General Information</h2>
+    <p>These Terms of Service govern your access to and use of Rovera.xyz, and any legal relationship between you ("User", "Buyer", or "Seller") and Rovera.</p>
+    <p><strong>Website Owner:</strong> Rovera — <a href="mailto:help@rovera.xyz" style="color:#555">help@rovera.xyz</a></p>
+    <p>By accessing or using Rovera, you agree to be legally bound by these Terms. If you do not agree, discontinue use immediately. Rovera reserves the right to modify these Terms at any time. Continued use constitutes acceptance.</p>
+  </div>
+
+  <div class="section">
+    <h2>Definitions</h2>
+    <ul>
+      <li><strong>Buyer</strong> — any user purchasing virtual items or currency through Rovera.</li>
+      <li><strong>Seller</strong> — any third-party user or supplier providing virtual items through Rovera.</li>
+      <li><strong>Rovera</strong> — the Rovera platform, website, marketplace systems, staff, and affiliates collectively.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Marketplace & Middleman Service</h2>
+    <p>Rovera operates exclusively as a <strong>marketplace and middleman service</strong> for Roblox limited items and virtual goods. Rovera does not own or officially distribute Roblox items.</p>
+    <div class="highlight-box">
+      <p>When a Buyer places an order: (1) Rovera temporarily holds the payment securely. (2) The Seller delivers the item within 24 hours. (3) The Buyer confirms receipt. (4) The held payment is released to the Seller.</p>
+    </div>
+    <p>Rovera is not affiliated with Roblox Corporation. All Roblox assets and trademarks belong to their respective owners.</p>
+  </div>
+
+  <div class="section">
+    <h2>Delivery Times</h2>
+    <p>Orders may take anywhere from <strong>1 hour up to 24 hours</strong> depending on seller availability, Roblox trade limitations, trade holds, or technical issues outside Rovera's control.</p>
+  </div>
+
+  <div class="section">
+    <h2>Supported Payment Methods</h2>
+    <p>Rovera primarily accepts cryptocurrency payments:</p>
+    <ul>
+      <li>Bitcoin (BTC)</li>
+      <li>Litecoin (LTC)</li>
+      <li>Ethereum (ETH)</li>
+    </ul>
+    <p>PayPal may occasionally be offered. Users are solely responsible for ensuring payment activity complies with all provider policies. Rovera assumes no liability for PayPal disputes, limitations, holds, or chargebacks.</p>
+  </div>
+
+  <div class="section">
+    <h2>Marketplace Fees</h2>
+    <ul>
+      <li><strong>Standard Accounts:</strong> 10% transaction fee on completed sales.</li>
+      <li><strong>Premium Accounts:</strong> 7% transaction fee on completed sales.</li>
+    </ul>
+    <p>Accounts with a positive Rovera balance that remain inactive may be subject to an inactivity fee of $5 USD every 30 days. Inactivity fees are non-refundable.</p>
+  </div>
+
+  <div class="section">
+    <h2>Dispute Resolution</h2>
+    <p>Disputes between Buyers and Sellers must be reported to Rovera Support at <strong>help@rovera.xyz</strong>. Rovera reserves the right to review disputes and determine resolutions at its sole discretion. Decisions are final.</p>
+  </div>
+
+  <div class="section">
+    <h2>Seller Responsibilities</h2>
+    <p>Sellers are fully responsible for maintaining account security, ensuring their Roblox account can trade, delivering sold items within the agreed timeframe, and providing accurate listing information.</p>
+    <p>Failure to complete transactions, fraudulent behavior, or marketplace abuse may result in suspension, balance forfeiture, or permanent termination.</p>
+  </div>
+
+  <div class="section">
+    <h2>Withdrawals</h2>
+    <p>Withdrawals may only be processed using supported cryptocurrency methods. Rovera reserves the right to delay withdrawals for fraud prevention, request identity verification, or deny withdrawals if Terms are violated.</p>
+  </div>
+
+  <div class="section">
+    <h2>AML & KYC Compliance</h2>
+    <p>Rovera reserves the right to request identity verification (KYC) or anti-money laundering (AML) documentation. Failure to comply may result in restricted functionality or account suspension. Rovera maintains a strict zero-tolerance policy regarding fraud, money laundering, or financial abuse.</p>
+  </div>
+
+  <div class="section">
+    <h2>Grounds for Suspension or Termination</h2>
+    <ul>
+      <li>Fraudulent activity or chargebacks</li>
+      <li>Scamming Buyers or Sellers</li>
+      <li>Providing false information</li>
+      <li>Harassment of staff or users</li>
+      <li>Violating Roblox Terms of Service</li>
+      <li>Violating these Terms in any way</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Intellectual Property</h2>
+    <p>The Rovera platform, branding, systems, design, and source code are the exclusive intellectual property of <strong>Sparkle (sw8tx)</strong>. Unauthorized copying, reproduction, or redistribution is strictly prohibited.</p>
+  </div>
+
+  <div class="section">
+    <h2>Limitation of Liability</h2>
+    <p>To the maximum extent permitted by law, Rovera shall not be liable for indirect or consequential damages, lost profits, Roblox account bans, delayed trades, seller misconduct, or cryptocurrency volatility. All use of Rovera is at the user's own risk.</p>
+  </div>
+
+  <div class="section">
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:help@rovera.xyz" style="color:#888">help@rovera.xyz</a></p>
+    <p>Additional support is available through the official Rovera Discord server.</p>
+  </div>
+</div>
+
+<footer>
+  <a href="/index.html" class="footer-logo">ROVERA</a>
+  <div class="footer-links">
+    <a href="/tos.html">Terms of Service</a>
+    <a href="/privacy.html">Privacy Policy</a>
+  </div>
+</footer>
+
+<div class="copyright-bar">Rovera © 2026 — Not affiliated in any way with the Roblox Corporation or any of its trademarks. Owned by Sparkle (sw8tx).</div>
+</body>
+</html>

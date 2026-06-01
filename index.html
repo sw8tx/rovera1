@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rovera — #1 Roblox Limited Marketplace</title>
+
+<link rel="icon" type="image/png" href="logo.png">
+
+<meta property="og:type"        content="website">
+<meta property="og:url"         content="https://rovera.xyz">
+<meta property="og:title"       content="Rovera — #1 Roblox Limited Marketplace">
+<meta property="og:description" content="Rovera is the safest marketplace to buy and sell Roblox limited in-game items from verified sellers directly. Crypto payments, 24/7 support.">
+<meta property="og:image"       content="https://rovera.xyz/logo.png">
+<meta name="theme-color"        content="#0f1e4a">
+<meta name="twitter:card"       content="summary">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:       #03040f;
+  --bg2:      #060818;
+  --blue:     #1a3a8a;
+  --blue2:    #2a5fd4;
+  --bluelt:   #5bc4ff;
+  --white:    #f0f0f0;
+  --grey:     #555;
+  --border:   #0d0e20;
+  --card:     #0a0b18;
+}
+
+body {
+  background: linear-gradient(135deg, var(--bg) 0%, var(--bg2) 50%, var(--bg) 100%);
+  color: var(--white);
+  font-family: 'Space Mono', monospace;
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  overflow: hidden; position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(30,40,120,0.2) 0%, rgba(20,50,180,0.05) 50%, transparent 70%);
+  pointer-events: none;
+}
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: 56px;
+  background: rgba(3,4,15,0.97);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  display: flex; align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  z-index: 100;
+}
+
+.nav-logo {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none;
+}
+.nav-logo img { width: 28px; height: 28px; object-fit: contain; }
+.nav-logo span {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px; letter-spacing: 0.06em;
+  color: var(--white);
+}
+
+.nav-right { display: flex; gap: 10px; align-items: center; }
+
+.btn {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 18px;
+  border-radius: 6px;
+  font-family: 'Space Mono', monospace;
+  font-size: 12px; font-weight: 700;
+  letter-spacing: 0.05em;
+  cursor: pointer; border: none;
+  transition: all 0.2s; text-decoration: none;
+}
+
+.btn-discord {
+  background: transparent;
+  border: 1.5px solid var(--blue);
+  color: var(--white);
+}
+.btn-discord:hover { background: rgba(26,58,138,0.3); border-color: var(--blue2); }
+.btn-discord svg { flex-shrink: 0; }
+
+.btn-login {
+  background: var(--blue);
+  color: var(--white);
+}
+.btn-login:hover { background: var(--blue2); }
+
+.user-chip {
+  display: none;
+  align-items: center; gap: 10px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 4px 14px 4px 4px;
+  cursor: pointer;
+}
+.user-chip img {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  border: 2px solid var(--blue2);
+  object-fit: cover;
+}
+.user-chip span { font-size: 11px; letter-spacing: 0.05em; color: var(--white); }
+
+.container { text-align: center; position: relative; z-index: 1; padding-bottom: 80px; }
+
+.dot {
+  width: 7px; height: 7px;
+  background: var(--bluelt); border-radius: 50%;
+  margin: 0 auto 40px;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(50,120,220,0.6); background: var(--bluelt); }
+  50%  { background: var(--blue); }
+  70%  { box-shadow: 0 0 0 12px rgba(20,60,180,0); }
+  100% { box-shadow: 0 0 0 0 rgba(20,60,180,0); background: var(--bluelt); }
+}
+
+h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(80px, 18vw, 180px);
+  letter-spacing: 0.04em; line-height: 1;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-size: 11px; letter-spacing: 0.35em;
+  color: var(--grey); text-transform: uppercase;
+  margin-bottom: 56px;
+}
+
+.countdown {
+  display: flex; gap: 8px;
+  justify-content: center; align-items: center;
+  margin-bottom: 64px;
+}
+.flip-unit { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.flip-card {
+  width: 72px; height: 80px;
+  background: var(--card); border: 1px solid #141525;
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.flip-card span {
+  font-family: 'Bebas Neue', sans-serif; font-size: 52px;
+  color: var(--white); line-height: 1; user-select: none;
+}
+@keyframes flipIn {
+  0%   { transform: rotateX(-90deg); opacity: 0; }
+  100% { transform: rotateX(0deg);   opacity: 1; }
+}
+.flip-card.animate span { animation: flipIn 0.3s ease-out forwards; }
+.unit-label { font-size: 9px; letter-spacing: 0.25em; color: var(--grey); text-transform: uppercase; }
+.sep { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--blue); line-height: 80px; margin-bottom: 28px; opacity: 0.8; }
+
+.bottom-bar {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: rgba(3,4,15,0.97);
+  border-top: 1px solid var(--border);
+  z-index: 20; padding: 10px 24px 8px;
+  display: flex; flex-direction: column; align-items: center; gap: 7px;
+}
+.footer-links { display: flex; gap: 28px; }
+.footer-links a {
+  font-size: 10px; letter-spacing: 0.2em;
+  color: var(--blue); text-decoration: none; text-transform: uppercase;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--bluelt); }
+.copyright { font-size: 10px; color: #4a5580; letter-spacing: 0.05em; }
+
+/* ===================== MODAL ===================== */
+.overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(4px);
+  z-index: 200;
+  align-items: center; justify-content: center;
+}
+.overlay.active { display: flex; }
+
+.modal {
+  font-family: 'Inter', sans-serif;
+  background: #08091a;
+  border: 1px solid #141525;
+  border-radius: 12px;
+  width: 400px; max-width: 95vw;
+  padding: 32px;
+  position: relative;
+  animation: modalIn 0.2s ease-out both;
+}
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.96) translateY(10px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.modal-close {
+  position: absolute; top: 16px; right: 16px;
+  background: none; border: none; color: var(--grey);
+  font-size: 18px; cursor: pointer; line-height: 1;
+  transition: color 0.2s;
+}
+.modal-close:hover { color: var(--white); }
+
+.tabs {
+  display: flex; margin-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+}
+.tab {
+  flex: 1; text-align: center;
+  padding: 10px 0; font-size: 13px; letter-spacing: 0.05em;
+  color: var(--grey); cursor: pointer; border: none; background: none;
+  border-bottom: 2px solid transparent; margin-bottom: -1px;
+  transition: all 0.2s; font-family: 'Space Mono', monospace;
+}
+.tab.active { color: var(--white); border-bottom-color: var(--blue2); }
+
+.modal-title {
+  font-size: 16px; font-weight: 600;
+  letter-spacing: 0.02em; color: var(--white);
+  margin-bottom: 20px; text-align: center;
+  font-family: 'Inter', sans-serif;
+}
+
+.field {
+  width: 100%; background: #0d0e20;
+  border: 1px solid #1a1b30; border-radius: 6px;
+  padding: 12px 14px; color: var(--white);
+  font-family: 'Inter', sans-serif; font-size: 13px;
+  margin-bottom: 12px; outline: none;
+  transition: border-color 0.2s;
+}
+.field:focus { border-color: var(--blue2); }
+.field::placeholder { color: #333; }
+
+.field-wrap { position: relative; margin-bottom: 12px; }
+.field-wrap .field { margin-bottom: 0; }
+.eye {
+  position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+  background: none; border: none; color: var(--grey); cursor: pointer;
+  font-size: 14px;
+}
+
+.agree-row {
+  display: flex; align-items: flex-start; gap: 10px;
+  margin-bottom: 16px; font-size: 10px; color: var(--grey); line-height: 1.5;
+}
+.agree-row input[type=checkbox] { margin-top: 2px; flex-shrink: 0; accent-color: var(--blue2); }
+.agree-row a { color: var(--blue2); text-decoration: none; }
+.agree-row a:hover { color: var(--bluelt); }
+
+.btn-full {
+  width: 100%; padding: 13px; border-radius: 6px;
+  background: var(--blue); color: var(--white);
+  font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700;
+  letter-spacing: 0.05em; cursor: pointer; border: none;
+  transition: background 0.2s;
+}
+.btn-full:hover { background: var(--blue2); }
+.btn-full:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.forgot-link {
+  display: block; text-align: right;
+  font-size: 10px; color: var(--blue2);
+  text-decoration: none; margin-bottom: 16px;
+  cursor: pointer; transition: color 0.2s;
+}
+.forgot-link:hover { color: var(--bluelt); }
+
+.err { font-size: 11px; color: #e05555; margin-bottom: 10px; text-align: center; min-height: 16px; }
+
+.verify-step { display: none; }
+.verify-step.active { display: block; }
+
+.welcome-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 26px; letter-spacing: 0.04em;
+  margin-bottom: 6px;
+}
+.welcome-title span { color: var(--bluelt); }
+
+.verify-desc { font-size: 11px; color: #aaa; line-height: 1.7; margin-bottom: 16px; }
+
+/* Roblox confirm card (yellow ring) */
+.roblox-card {
+  background: #0d0e20;
+  border: 2px solid #f5c518;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex; align-items: center; gap: 16px;
+  margin: 16px 0;
+  animation: modalIn 0.25s ease-out both;
+}
+.roblox-avatar-wrap {
+  position: relative; flex-shrink: 0;
+}
+.roblox-avatar {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  border: 3px solid #f5c518;
+  object-fit: cover;
+  background: #1a1b30;
+}
+.roblox-info { line-height: 1.7; }
+.roblox-name { font-size: 15px; font-weight: 700; color: var(--white); }
+.roblox-handle { font-size: 11px; color: #aaa; }
+.roblox-id { font-size: 10px; color: #555; }
+
+/* Phrase box */
+.phrase-box {
+  background: #0d0e20; border: 1px solid #1a1b30; border-radius: 6px;
+  padding: 14px 40px 14px 14px; position: relative;
+  font-size: 12px; color: #8899cc; line-height: 1.5;
+  margin-bottom: 8px; font-weight: 700;
+}
+.copy-btn {
+  position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+  background: none; border: none; color: var(--grey); cursor: pointer; font-size: 16px;
+  transition: color 0.2s;
+}
+.copy-btn:hover { color: var(--bluelt); }
+
+.new-phrase-btn {
+  background: none; border: none; color: var(--grey);
+  font-family: 'Space Mono', monospace; font-size: 10px;
+  cursor: pointer; display: flex; align-items: center; gap: 6px;
+  margin: 0 auto 16px; transition: color 0.2s;
+}
+.new-phrase-btn:hover { color: var(--bluelt); }
+
+.open-roblox-btn {
+  width: 100%; padding: 11px; border-radius: 6px;
+  background: #0d0e20; border: 1px solid #1a1b30;
+  color: #888; font-family: 'Space Mono', monospace;
+  font-size: 11px; cursor: pointer; transition: all 0.2s;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  margin-bottom: 12px; text-decoration: none;
+}
+.open-roblox-btn:hover { border-color: var(--blue2); color: var(--white); }
+
+/* Code input boxes */
+.code-boxes {
+  display: flex; gap: 8px; justify-content: center;
+  margin-bottom: 16px;
+}
+.code-box {
+  width: 44px; height: 52px;
+  background: #0d0e20; border: 1.5px solid #1a1b30;
+  border-radius: 8px;
+  font-family: 'Bebas Neue', sans-serif; font-size: 28px;
+  color: var(--bluelt); text-align: center;
+  outline: none; transition: border-color 0.2s;
+  caret-color: var(--bluelt);
+}
+.code-box:focus { border-color: var(--blue2); }
+.code-box.filled { border-color: var(--blue2); }
+
+.btn-outline {
+  width: 100%; padding: 11px; border-radius: 6px;
+  background: transparent; border: 1px solid #1a1b30;
+  color: var(--grey); font-family: 'Space Mono', monospace;
+  font-size: 12px; cursor: pointer; transition: all 0.2s; margin-top: 8px;
+}
+.btn-outline:hover { border-color: var(--grey); color: var(--white); }
+
+.step-hint {
+  font-size: 10px; color: #333; letter-spacing: 0.1em;
+  text-align: center; margin-bottom: 12px;
+}
+
+.container { animation: fadeUp 0.8s ease both; }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.spinner-row {
+  display: flex; align-items: center; gap: 8px;
+  justify-content: center; color: #6699ff;
+  font-size: 11px; margin-bottom: 10px; min-height: 16px;
+}
+.spinner {
+  width: 14px; height: 14px;
+  border: 2px solid #1a2a5a;
+  border-top-color: #5bc4ff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">
+    <img src="logo.png" alt="Rovera">
+    <span>ROVERA</span>
+  </a>
+  <div class="nav-right">
+    <a href="https://discord.gg/rovera" target="_blank" class="btn btn-discord">
+      <svg width="16" height="12" viewBox="0 0 127.14 96.36" fill="currentColor">
+        <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/>
+      </svg>
+      Discord
+    </a>
+    <button class="btn btn-login" id="loginBtn" onclick="openModal('signin')">Log in</button>
+    <div class="user-chip" id="userChip" onclick="logout()">
+      <img id="chipAvatar" src="" alt="">
+      <span id="chipName"></span>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="container">
+  <div class="dot"></div>
+  <h1>ROVERA</h1>
+  <p class="subtitle">Coming Soon</p>
+  <div class="countdown">
+    <div class="flip-unit">
+      <div class="flip-card" id="card-days"><span id="num-days">0</span></div>
+      <span class="unit-label">Days</span>
+    </div>
+    <div class="sep">:</div>
+    <div class="flip-unit">
+      <div class="flip-card" id="card-hours"><span id="num-hours">0</span></div>
+      <span class="unit-label">Hours</span>
+    </div>
+    <div class="sep">:</div>
+    <div class="flip-unit">
+      <div class="flip-card" id="card-minutes"><span id="num-minutes">0</span></div>
+      <span class="unit-label">Minutes</span>
+    </div>
+    <div class="sep">:</div>
+    <div class="flip-unit">
+      <div class="flip-card" id="card-seconds"><span id="num-seconds">0</span></div>
+      <span class="unit-label">Seconds</span>
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM BAR -->
+<div class="bottom-bar">
+  <div class="footer-links">
+    <a href="/tos.html">Terms of Service</a>
+    <a href="/privacy.html">Privacy Policy</a>
+  </div>
+  <div class="copyright">Rovera © 2026 — Not affiliated in any way with the Roblox Corporation or any of its trademarks. Owned by Sparkle (sw8tx).</div>
+</div>
+
+<!-- ======== MODAL ======== -->
+<div class="overlay" id="overlay" onclick="overlayClick(event)">
+<div class="modal" id="modal">
+  <button class="modal-close" onclick="closeModal()">✕</button>
+
+  <!-- STEP 1: AUTH FORMS -->
+  <div id="stepAuth" class="verify-step active">
+    <div style="display:flex;justify-content:center;margin-bottom:12px">
+      <div style="width:8px;height:8px;border-radius:50%;background:#5bc4ff;animation:pulse 2s infinite"></div>
+    </div>
+    <div class="tabs">
+      <button class="tab" id="tabSignin" onclick="switchTab('signin')">Sign in</button>
+      <button class="tab" id="tabSignup" onclick="switchTab('signup')">Sign up</button>
+    </div>
+
+    <!-- SIGN IN -->
+    <div id="formSignin">
+      <div class="modal-title">Welcome back</div>
+      <input class="field" id="si-username" type="text" placeholder="Roblox username" autocomplete="off">
+      <div class="field-wrap">
+        <input class="field" id="si-password" type="password" placeholder="Password">
+        <button class="eye" onclick="togglePw('si-password', this)">👁</button>
+      </div>
+      <span class="forgot-link" onclick="forgotPassword()">Forgot your password?</span>
+      <div class="err" id="si-err"></div>
+      <button class="btn-full" onclick="doSignin()">Sign in</button>
+    </div>
+
+    <!-- SIGN UP -->
+    <div id="formSignup" style="display:none">
+      <div class="modal-title">Create new account</div>
+      <input class="field" id="su-username" type="text" placeholder="Roblox username" autocomplete="off">
+      <input class="field" id="su-email" type="email" placeholder="Your email address">
+      <div class="field-wrap">
+        <input class="field" id="su-password" type="password" placeholder="Password">
+        <button class="eye" onclick="togglePw('su-password', this)">👁</button>
+      </div>
+      <div class="field-wrap">
+        <input class="field" id="su-password2" type="password" placeholder="Repeat password">
+        <button class="eye" onclick="togglePw('su-password2', this)">👁</button>
+      </div>
+      <div class="agree-row">
+        <input type="checkbox" id="agreeBox">
+        <label for="agreeBox">By creating an account you agree to our <a href="/tos.html" target="_blank">Terms of Service</a> and <a href="/privacy.html" target="_blank">Privacy Policy</a></label>
+      </div>
+      <div class="err" id="su-err"></div>
+      <button class="btn-full" onclick="doSignup()">Create Rovera Account</button>
+    </div>
+  </div>
+
+  <!-- STEP 2: ROBLOX ACCOUNT CONFIRM -->
+  <div id="stepRoblox" class="verify-step">
+    <div class="welcome-title">Is this <span>you?</span></div>
+    <p class="verify-desc">We found this Roblox account. Confirm it's yours to continue.</p>
+    <div class="roblox-card">
+      <div class="roblox-avatar-wrap">
+        <img class="roblox-avatar" id="robloxAvatar" src="logo.png" alt="">
+      </div>
+      <div class="roblox-info">
+        <div class="roblox-name" id="robloxName"></div>
+        <div class="roblox-handle" id="robloxHandle"></div>
+        <div class="roblox-id" id="robloxId"></div>
+      </div>
+    </div>
+    <div class="err" id="rx-err"></div>
+    <button class="btn-full" onclick="confirmRoblox()">Yes, it's me</button>
+    <button class="btn-outline" onclick="showStep('stepAuth'); switchTab('signup')">No, try again</button>
+  </div>
+
+  <!-- STEP 3: BIO PASSPHRASE -->
+  <div id="stepBio" class="verify-step">
+    <div class="welcome-title">Verify <span>ownership</span></div>
+    <p class="verify-desc">Copy this passphrase and paste it into your Roblox profile bio. Then click Verify below.</p>
+    <div class="phrase-box" id="phraseBox">
+      <span id="phraseText"></span>
+      <button class="copy-btn" onclick="copyPhrase()" title="Copy">⎘</button>
+    </div>
+    <button class="new-phrase-btn" onclick="generatePhrase()">↻ New phrase</button>
+    <a class="open-roblox-btn" id="openRobloxBtn" href="https://www.roblox.com/users/profile" target="_blank">
+      🔗 Open Roblox profile
+    </a>
+    <div class="err" id="bio-err"></div>
+    <button class="btn-full" id="bioVerifyBtn" onclick="doBioVerify()">Verify bio</button>
+  </div>
+
+  <!-- STEP 4: EMAIL CODE -->
+  <div id="stepEmail" class="verify-step">
+    <div class="welcome-title">Check your <span>email</span></div>
+    <p class="verify-desc" id="emailDesc">We sent a 6-digit code to your email address. Enter it below.</p>
+    <div style="text-align:center;margin-bottom:20px">
+      <div id="sentEmailDisplay" style="font-size:12px;color:#5bc4ff;letter-spacing:0.05em;margin-bottom:4px"></div>
+      <div style="font-size:10px;color:#333">Check your spam folder if you don't see it</div>
+    </div>
+    <div class="code-boxes" id="codeBoxes">
+      <input class="code-box" maxlength="1" type="text" inputmode="numeric" pattern="[0-9]">
+      <input class="code-box" maxlength="1" type="text" inputmode="numeric" pattern="[0-9]">
+      <input class="code-box" maxlength="1" type="text" inputmode="numeric" pattern="[0-9]">
+      <input class="code-box" maxlength="1" type="text" inputmode="numeric" pattern="[0-9]">
+      <input class="code-box" maxlength="1" type="text" inputmode="numeric" pattern="[0-9]">
+      <input class="code-box" maxlength="1" type="text" inputmode="numeric" pattern="[0-9]">
+    </div>
+    <button class="new-phrase-btn" onclick="resendCode()" style="margin-bottom:16px">↻ Resend code</button>
+    <div class="err" id="email-err"></div>
+    <button class="btn-full" id="codeVerifyBtn" onclick="doCodeVerify()">Verify code</button>
+  </div>
+
+</div>
+</div>
+
+<script>
+// ======= SPINNER =======
+function showSpinner(errId, msg) {
+  const el = document.getElementById(errId);
+  el.innerHTML = `<div class="spinner-row"><div class="spinner"></div><span>${msg}</span></div>`;
+}
+
+// ======= COUNTDOWN =======
+const TARGET = new Date('2026-06-04T16:00:00');
+const prev = { days:-1, hours:-1, minutes:-1, seconds:-1 };
+function setVal(unit, val) {
+  if (prev[unit] === val) return;
+  prev[unit] = val;
+  const card = document.getElementById('card-'+unit);
+  const num  = document.getElementById('num-'+unit);
+  num.textContent = String(val);
+  card.classList.remove('animate');
+  void card.offsetWidth;
+  card.classList.add('animate');
+}
+function tick() {
+  const diff = TARGET - new Date();
+  if (diff <= 0) { ['days','hours','minutes','seconds'].forEach(u=>setVal(u,0)); return; }
+  setVal('days',    Math.floor(diff/86400000));
+  setVal('hours',   Math.floor((diff%86400000)/3600000));
+  setVal('minutes', Math.floor((diff%3600000)/60000));
+  setVal('seconds', Math.floor((diff%60000)/1000));
+}
+tick(); setInterval(tick, 1000);
+
+// ======= MODAL STATE =======
+let currentMode = 'signup';
+let pendingUser = null;
+let currentPhrase = '';
+
+function openModal(mode) {
+  document.getElementById('overlay').classList.add('active');
+  showStep('stepAuth');
+  switchTab(mode || 'signup');
+}
+function closeModal() { document.getElementById('overlay').classList.remove('active'); }
+function overlayClick(e) { if (e.target === document.getElementById('overlay')) closeModal(); }
+
+function showStep(id) {
+  ['stepAuth','stepRoblox','stepBio','stepEmail'].forEach(s => {
+    document.getElementById(s).classList.remove('active');
+  });
+  document.getElementById(id).classList.add('active');
+}
+
+function switchTab(tab) {
+  currentMode = tab;
+  document.getElementById('tabSignin').classList.toggle('active', tab==='signin');
+  document.getElementById('tabSignup').classList.toggle('active', tab==='signup');
+  document.getElementById('formSignin').style.display = tab==='signin' ? 'block' : 'none';
+  document.getElementById('formSignup').style.display = tab==='signup' ? 'block' : 'none';
+}
+
+function togglePw(id, btn) {
+  const f = document.getElementById(id);
+  f.type = f.type==='password' ? 'text' : 'password';
+  btn.textContent = f.type==='password' ? '👁' : '🙈';
+}
+
+// ======= API =======
+function apiUrl() {
+  if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+    return 'http://localhost:3000/roblox';
+  }
+  return '/.netlify/functions/roblox';
+}
+async function apiCall(action, payload) {
+  try {
+    const r = await fetch(apiUrl(), {
+      method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ action, ...payload })
+    });
+    if (!r.ok) return null;
+    const d = await r.json();
+    return d.error ? null : d;
+  } catch { return null; }
+}
+
+// ======= VISITOR TRACKING =======
+(async () => {
+  try {
+    await fetch(apiUrl(), {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'track', referrer: document.referrer || 'direct' })
+    });
+  } catch {}
+})();
+
+// ======= ROBLOX LOOKUP =======
+async function lookupRoblox(username) {
+  // 1. Try server-side proxy first
+  const via = await apiCall('lookupUser', { username });
+  if (via && via.id) return via;
+
+  // 2. Fallback: browser-side with multiple CORS proxies
+  const proxyList = [
+    async () => {
+      const r = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent('https://users.roblox.com/v1/usernames/users')}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ usernames: [username], excludeBannedUsers: false })
+      });
+      return r.ok ? r.json() : null;
+    },
+    async () => {
+      const r = await fetch(`https://corsproxy.io/?${encodeURIComponent('https://users.roblox.com/v1/usernames/users')}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ usernames: [username], excludeBannedUsers: false })
+      });
+      return r.ok ? r.json() : null;
+    },
+    async () => {
+      // Try GET search as last resort
+      const r = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(`https://www.roblox.com/search/users?keyword=${encodeURIComponent(username)}`)}`);
+      if (!r.ok) return null;
+      // Manually construct a partial user object from search
+      const r2 = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(`https://users.roblox.com/v1/users/search?keyword=${encodeURIComponent(username)}&limit=10`)}`);
+      if (!r2.ok) return null;
+      const d2 = await r2.json();
+      const match = d2.data?.find(u => u.name.toLowerCase() === username.toLowerCase());
+      if (!match) return null;
+      return { data: [{ id: match.id, name: match.name, displayName: match.displayName }] };
+    }
+  ];
+
+  for (const proxy of proxyList) {
+    try {
+      const d = await proxy();
+      if (!d || !d.data || !d.data[0]) continue;
+      const u = d.data[0];
+      // Get avatar
+      let avatar = null;
+      try {
+        const ar = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(`https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=${u.id}&size=150x150&format=Png`)}`);
+        if (ar.ok) { const ad = await ar.json(); avatar = ad.data?.[0]?.imageUrl || null; }
+      } catch {}
+      return { id: u.id, name: u.name, displayName: u.displayName, avatar };
+    } catch {}
+  }
+  return null;
+}
+
+async function checkBio(userId) {
+  // 1. Try server-side
+  const r = await apiCall('checkBio', { userId });
+  if (r && r.bio !== undefined) return r.bio;
+
+  // 2. Fallback browser-side
+  try {
+    const res = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(`https://users.roblox.com/v1/users/${userId}`)}`);
+    if (!res.ok) return null;
+    const d = await res.json();
+    return d.description || '';
+  } catch { return null; }
+}
+
+// ======= PASSPHRASE =======
+const WORDS = ['alpha','bravo','charlie','delta','echo','foxtrot','golf','hotel','india','juliet','kilo','lima','mike','nova','oscar','papa','quebec','romeo','sierra','tango','ultra','victor','whisky','xray','yankee','zulu','blaze','comet','drift','ember','flare','ghost','haven','iron','jade','karma','lunar','mist','neon','orbit','prism','quest','ridge','solar','titan','umbra','vault','wave','xenon','yield'];
+function generatePhrase() {
+  const words = [];
+  const used = new Set();
+  while (words.length < 7) {
+    const w = WORDS[Math.floor(Math.random() * WORDS.length)];
+    if (!used.has(w)) { used.add(w); words.push(w); }
+  }
+  currentPhrase = words.join(' ');
+  document.getElementById('phraseText').textContent = currentPhrase;
+}
+function copyPhrase() {
+  navigator.clipboard.writeText(currentPhrase).then(() => {
+    const btn = document.querySelector('.copy-btn');
+    btn.textContent = '✓';
+    setTimeout(() => btn.textContent = '⎘', 1500);
+  });
+}
+
+// ======= SIGN UP — STEP 1 =======
+async function doSignup() {
+  const username = document.getElementById('su-username').value.trim();
+  const email    = document.getElementById('su-email').value.trim();
+  const pw       = document.getElementById('su-password').value;
+  const pw2      = document.getElementById('su-password2').value;
+  const err      = document.getElementById('su-err');
+  err.textContent = '';
+
+  if (!username) { err.textContent = 'Enter your Roblox username.'; return; }
+  if (!email || !email.includes('@')) { err.textContent = 'Enter a valid email address.'; return; }
+  if (pw.length < 6) { err.textContent = 'Password must be at least 6 characters.'; return; }
+  if (pw !== pw2) { err.textContent = 'Passwords do not match.'; return; }
+  if (!document.getElementById('agreeBox').checked) { err.textContent = 'You must agree to the Terms of Service.'; return; }
+
+  showSpinner('su-err', 'Looking up Roblox account...');
+
+  const user = await lookupRoblox(username);
+
+  if (!user) {
+    err.textContent = 'Could not find that Roblox username. Check and try again.';
+    return;
+  }
+
+  pendingUser = {
+    username: user.name,
+    displayName: user.displayName,
+    robloxId: user.id,
+    avatar: user.avatar,
+    password: btoa(pw),
+    email: email
+  };
+
+  // Show roblox confirm card
+  document.getElementById('robloxAvatar').src = user.avatar || 'logo.png';
+  document.getElementById('robloxName').textContent = user.displayName || user.name;
+  document.getElementById('robloxHandle').textContent = '@' + user.name;
+  document.getElementById('robloxId').textContent = 'ID: ' + user.id;
+  document.getElementById('rx-err').textContent = '';
+  err.textContent = '';
+  showStep('stepRoblox');
+}
+
+// ======= STEP 2: CONFIRM ROBLOX =======
+function confirmRoblox() {
+  // Move to bio verify
+  generatePhrase();
+  if (pendingUser.robloxId) {
+    document.getElementById('openRobloxBtn').href = `https://www.roblox.com/users/${pendingUser.robloxId}/profile`;
+  }
+  document.getElementById('bio-err').textContent = '';
+  showStep('stepBio');
+}
+
+// ======= STEP 3: BIO VERIFY =======
+async function doBioVerify() {
+  const err = document.getElementById('bio-err');
+  const btn = document.getElementById('bioVerifyBtn');
+  showSpinner('bio-err', 'Scanning your Roblox bio...');
+  btn.disabled = true;
+
+  const bio = await checkBio(pendingUser.robloxId);
+  btn.disabled = false;
+
+  if (bio === null) { err.textContent = 'Could not reach Roblox. Try again.'; return; }
+  if (!bio.includes(currentPhrase)) {
+    err.textContent = 'Passphrase not found in your bio. Copy it exactly and save!';
+    return;
+  }
+
+  // Bio verified — send email code
+  err.textContent = '';
+  showSpinner('bio-err', 'Sending verification code...');
+  btn.disabled = true;
+
+  const result = await apiCall('sendCode', { email: pendingUser.email, username: pendingUser.username });
+  btn.disabled = false;
+
+  if (!result || !result.sent) {
+    err.textContent = 'Could not send email. Try again.';
+    return;
+  }
+
+  // Show email step
+  document.getElementById('sentEmailDisplay').textContent = pendingUser.email;
+  document.getElementById('email-err').textContent = '';
+  clearCodeBoxes();
+  showStep('stepEmail');
+  // Focus first box
+  setTimeout(() => document.querySelector('.code-box').focus(), 100);
+}
+
+// ======= STEP 4: EMAIL CODE VERIFY =======
+function getCode() {
+  return Array.from(document.querySelectorAll('.code-box')).map(b => b.value).join('');
+}
+function clearCodeBoxes() {
+  document.querySelectorAll('.code-box').forEach(b => { b.value = ''; b.classList.remove('filled'); });
+}
+
+async function doCodeVerify() {
+  const code = getCode();
+  const err = document.getElementById('email-err');
+  const btn = document.getElementById('codeVerifyBtn');
+
+  if (code.length < 6) { err.textContent = 'Enter the full 6-digit code.'; return; }
+
+  showSpinner('email-err', 'Verifying...');
+  btn.disabled = true;
+
+  const result = await apiCall('verifyCode', { email: pendingUser.email, code });
+  btn.disabled = false;
+
+  if (!result || !result.valid) {
+    err.textContent = result?.reason === 'Code expired' ? 'Code expired. Request a new one.' : 'Wrong code. Try again.';
+    return;
+  }
+
+  // Save user to localStorage
+  const users = JSON.parse(localStorage.getItem('rovera_users') || '{}');
+  users[pendingUser.username.toLowerCase()] = {
+    username: pendingUser.username,
+    displayName: pendingUser.displayName,
+    robloxId: pendingUser.robloxId,
+    avatar: pendingUser.avatar,
+    email: pendingUser.email,
+    password: pendingUser.password,
+  };
+  localStorage.setItem('rovera_users', JSON.stringify(users));
+  loginSuccess(users[pendingUser.username.toLowerCase()]);
+}
+
+async function resendCode() {
+  const err = document.getElementById('email-err');
+  showSpinner('email-err', 'Resending...');
+  const result = await apiCall('sendCode', { email: pendingUser.email, username: pendingUser.username });
+  if (!result || !result.sent) {
+    err.textContent = 'Could not resend. Try again.';
+  } else {
+    err.innerHTML = '<span style="color:#5bc4ff">Code resent!</span>';
+    clearCodeBoxes();
+    setTimeout(() => document.querySelector('.code-box').focus(), 100);
+  }
+}
+
+// ======= CODE BOX NAVIGATION =======
+document.addEventListener('DOMContentLoaded', () => {
+  const boxes = document.querySelectorAll('.code-box');
+  boxes.forEach((box, i) => {
+    box.addEventListener('input', e => {
+      const val = e.target.value.replace(/\D/g, '');
+      e.target.value = val;
+      e.target.classList.toggle('filled', val !== '');
+      if (val && i < boxes.length - 1) boxes[i+1].focus();
+      if (getCode().length === 6) doCodeVerify();
+    });
+    box.addEventListener('keydown', e => {
+      if (e.key === 'Backspace' && !box.value && i > 0) {
+        boxes[i-1].value = '';
+        boxes[i-1].classList.remove('filled');
+        boxes[i-1].focus();
+      }
+    });
+    box.addEventListener('paste', e => {
+      e.preventDefault();
+      const paste = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g, '').slice(0, 6);
+      paste.split('').forEach((ch, idx) => {
+        if (boxes[idx]) { boxes[idx].value = ch; boxes[idx].classList.add('filled'); }
+      });
+      if (paste.length === 6) doCodeVerify();
+      else if (boxes[paste.length]) boxes[paste.length].focus();
+    });
+  });
+});
+
+// ======= SIGN IN =======
+async function doSignin() {
+  const username = document.getElementById('si-username').value.trim();
+  const pw       = document.getElementById('si-password').value;
+  const err      = document.getElementById('si-err');
+  err.textContent = '';
+
+  if (!username || !pw) { err.textContent = 'Fill in all fields.'; return; }
+
+  const users = JSON.parse(localStorage.getItem('rovera_users') || '{}');
+  const u = users[username.toLowerCase()];
+  if (!u) { err.textContent = 'Account not found.'; return; }
+  if (u.password !== btoa(pw)) { err.textContent = 'Wrong password.'; return; }
+
+  loginSuccess(u);
+}
+
+async function forgotPassword() {
+  const username = document.getElementById('si-username').value.trim();
+  const err = document.getElementById('si-err');
+  if (!username) { err.textContent = 'Enter your Roblox username first.'; return; }
+
+  const users = JSON.parse(localStorage.getItem('rovera_users') || '{}');
+  const u = users[username.toLowerCase()];
+  if (!u) { err.textContent = 'Account not found.'; return; }
+
+  pendingUser = { ...u, isReset: true };
+  showSpinner('si-err', 'Sending reset code...');
+  const result = await apiCall('sendCode', { email: u.email, username: u.username });
+  if (!result || !result.sent) { err.textContent = 'Could not send reset email.'; return; }
+
+  document.getElementById('sentEmailDisplay').textContent = u.email;
+  document.getElementById('emailDesc').textContent = 'Enter the 6-digit code we sent to reset your password.';
+  document.getElementById('email-err').textContent = '';
+  clearCodeBoxes();
+  showStep('stepEmail');
+  setTimeout(() => document.querySelector('.code-box').focus(), 100);
+}
+
+// ======= LOGIN STATE =======
+function loginSuccess(user) {
+  closeModal();
+  document.getElementById('loginBtn').style.display = 'none';
+  const chip = document.getElementById('userChip');
+  chip.style.display = 'flex';
+  document.getElementById('chipAvatar').src = user.avatar || 'logo.png';
+  document.getElementById('chipName').textContent = user.username;
+  localStorage.setItem('rovera_session', JSON.stringify(user));
+}
+
+function logout() {
+  localStorage.removeItem('rovera_session');
+  document.getElementById('loginBtn').style.display = '';
+  document.getElementById('userChip').style.display = 'none';
+}
+
+// Auto-login
+const session = localStorage.getItem('rovera_session');
+if (session) { try { loginSuccess(JSON.parse(session)); } catch(e) {} }
+</script>
+</body>
+</html>

@@ -646,7 +646,7 @@ function apiUrl() {
   if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
     return 'http://localhost:3000/roblox';
   }
-  return '/.netlify/functions/roblox';
+  return '/roblox';
 }
 async function apiCall(action, payload) {
   try {

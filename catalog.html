@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rovera - Limited Catalog</title>
+
+<link rel="icon" type="image/png" href="logo.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://rovera.xyz/catalog.html">
+<meta property="og:title" content="Rovera - Roblox Limited Catalog">
+<meta property="og:description" content="Browse Roblox limited values, RAP, demand, trends, and market flags with Rovera.">
+<meta property="og:image" content="https://rovera.xyz/logo.png">
+<meta name="theme-color" content="#0f1e4a">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #08090d;
+  --bg2: #11131a;
+  --blue: #3f7f86;
+  --blue2: #67a3a8;
+  --bluelt: #8fd0d4;
+  --white: #f3f5f7;
+  --grey: #9aa2b1;
+  --muted: #687080;
+  --border: #242834;
+  --card: #11131a;
+  --panel: #151820;
+  --good: #4dd889;
+  --warn: #f1c95d;
+  --bad: #ef6676;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 54%, var(--bg) 100%);
+  color: var(--white);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.025), transparent 38%);
+  pointer-events: none;
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  min-height: 56px;
+  background: rgba(8,9,13,0.96);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 32px;
+  z-index: 100;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.nav-logo img { width: 28px; height: 28px; object-fit: contain; }
+.nav-logo span {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  letter-spacing: 0.06em;
+  color: var(--white);
+}
+
+.nav-right {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.nav-legal {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 4px;
+}
+.nav-legal a {
+  color: var(--grey);
+  font-size: 11px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.nav-legal a:hover { color: var(--bluelt); }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 36px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+}
+.btn-discord,
+.btn-ghost {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border);
+  color: var(--white);
+}
+.btn-discord:hover,
+.btn-ghost:hover {
+  background: rgba(103,163,168,0.12);
+  border-color: var(--blue2);
+}
+.btn-primary {
+  background: var(--blue);
+  border: 1px solid var(--blue);
+  color: var(--white);
+}
+.btn-primary:hover { background: var(--blue2); border-color: var(--blue2); }
+.btn.active { border-color: var(--bluelt); color: var(--bluelt); }
+
+main {
+  position: relative;
+  z-index: 1;
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 96px 0 104px;
+}
+
+.catalog-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 24px;
+  align-items: end;
+  margin-bottom: 24px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  color: var(--bluelt);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.eyebrow::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--bluelt);
+  box-shadow: 0 0 16px rgba(91,196,255,0.8);
+}
+
+h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(48px, 8vw, 86px);
+  letter-spacing: 0.04em;
+  line-height: 0.92;
+}
+
+.head-copy {
+  max-width: 620px;
+  color: var(--grey);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 1.7;
+  margin-top: 14px;
+}
+
+.catalog-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(120px, 1fr));
+  gap: 10px;
+  min-width: min(430px, 100%);
+}
+.stat {
+  background: rgba(17,19,26,0.72);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+  min-height: 78px;
+}
+.stat span {
+  display: block;
+  color: var(--bluelt);
+  font-size: 10px;
+  margin-bottom: 6px;
+}
+.stat strong {
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+}
+
+.catalog-tools {
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) repeat(3, minmax(160px, auto));
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: rgba(17,19,26,0.76);
+  margin-bottom: 20px;
+}
+
+.searchbox,
+select {
+  width: 100%;
+  min-height: 44px;
+  background: #10131a;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--white);
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  outline: none;
+}
+.searchbox {
+  padding: 0 14px;
+}
+select {
+  padding: 0 10px;
+}
+.searchbox:focus,
+select:focus {
+  border-color: var(--blue2);
+}
+
+.catalog-status {
+  min-height: 20px;
+  color: var(--grey);
+  font-size: 11px;
+  margin: 0 0 14px;
+}
+.catalog-status strong { color: var(--bluelt); }
+
+.items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 14px;
+}
+
+.item-card {
+  min-height: 188px;
+  background: rgba(17,19,26,0.78);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+  text-decoration: none;
+  color: var(--white);
+  display: grid;
+  grid-template-columns: 82px minmax(0, 1fr);
+  gap: 14px;
+  transition: border-color 0.2s, background 0.2s;
+}
+.item-card:hover {
+  border-color: var(--bluelt);
+  background: rgba(21,24,32,0.95);
+}
+.item-thumb {
+  width: 82px;
+  height: 82px;
+  border-radius: 8px;
+  border: 1px solid #1a1b30;
+  background: #111421;
+  object-fit: contain;
+}
+.item-info {
+  min-width: 0;
+}
+.item-name {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 1.25;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 8px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.item-id {
+  color: var(--muted);
+  font-size: 10px;
+  margin-bottom: 10px;
+}
+.value-line {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 11px;
+  color: var(--grey);
+  margin-bottom: 12px;
+}
+.value-line strong {
+  color: var(--white);
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+}
+.item-tags {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+.tag {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  border: 1px solid #1a1b30;
+  border-radius: 999px;
+  padding: 4px 9px;
+  color: var(--grey);
+  font-size: 10px;
+  background: rgba(13,14,32,0.8);
+}
+.tag.good { color: var(--good); border-color: rgba(77,216,137,0.45); }
+.tag.warn { color: var(--warn); border-color: rgba(241,201,93,0.45); }
+.tag.bad { color: var(--bad); border-color: rgba(239,102,118,0.45); }
+
+.empty-state {
+  display: none;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 32px;
+  text-align: center;
+  color: var(--grey);
+  background: rgba(10,11,24,0.78);
+}
+.empty-state.active { display: block; }
+
+.load-more {
+  display: flex;
+  justify-content: center;
+  margin-top: 22px;
+}
+.load-more button {
+  min-width: 180px;
+}
+
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(8,9,13,0.96);
+  border-top: 1px solid var(--border);
+  z-index: 20;
+  padding: 10px 24px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+}
+.footer-links { display: flex; gap: 28px; flex-wrap: wrap; justify-content: center; }
+.footer-links a {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--blue2);
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.footer-links a:hover { color: var(--bluelt); }
+.copyright {
+  font-size: 10px;
+  color: #4a5580;
+  letter-spacing: 0.05em;
+  text-align: center;
+}
+
+@media (max-width: 920px) {
+  nav {
+    position: static;
+    padding: 14px 18px;
+    align-items: flex-start;
+  }
+  main {
+    width: min(100% - 28px, 1180px);
+    padding-top: 34px;
+  }
+  .catalog-head {
+    grid-template-columns: 1fr;
+  }
+  .catalog-tools {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 620px) {
+  nav {
+    flex-direction: column;
+  }
+  .nav-right {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  .nav-legal {
+    width: 100%;
+    padding: 2px 0 0;
+  }
+  .btn {
+    flex: 1 1 calc(50% - 10px);
+    padding: 8px 10px;
+    font-size: 11px;
+  }
+  .catalog-stats,
+  .catalog-tools {
+    grid-template-columns: 1fr;
+  }
+  .item-card {
+    grid-template-columns: 72px minmax(0, 1fr);
+  }
+  .item-thumb {
+    width: 72px;
+    height: 72px;
+  }
+  .bottom-bar {
+    position: static;
+    margin-top: 34px;
+  }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">
+    <img src="logo.png" alt="Rovera">
+    <span>ROVERA</span>
+  </a>
+  <div class="nav-right">
+    <a href="/index.html" class="btn btn-ghost">Trade Checker</a>
+    <a href="/catalog.html" class="btn btn-ghost active">Catalog</a>
+    <div class="nav-legal" aria-label="Legal pages">
+      <a href="/privacy.html">Privacy</a>
+      <a href="/tos.html">Terms</a>
+    </div>
+    <a href="https://discord.gg/rovera" target="_blank" class="btn btn-discord">
+      <svg width="16" height="12" viewBox="0 0 127.14 96.36" fill="currentColor" aria-hidden="true">
+        <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/>
+      </svg>
+      Discord
+    </a>
+  </div>
+</nav>
+
+<main>
+  <section class="catalog-head">
+    <div>
+      <div class="eyebrow">Live limited data</div>
+      <h1>Catalog</h1>
+      <p class="head-copy">Every limited is pulled through RoliMon's item data, with live value, RAP, demand, trend, and risk flags ready for the Rovera trade checker.</p>
+    </div>
+    <div class="catalog-stats">
+      <div class="stat"><span>Items</span><strong id="statItems">-</strong></div>
+      <div class="stat"><span>Total value</span><strong id="statValue">-</strong></div>
+      <div class="stat"><span>High demand</span><strong id="statDemand">-</strong></div>
+    </div>
+  </section>
+
+  <section class="catalog-tools" aria-label="Catalog filters">
+    <input class="searchbox" id="catalogSearch" type="search" placeholder="Search item name, acronym, or ID" autocomplete="off">
+    <select id="sortSelect" aria-label="Sort items">
+      <option value="value">Highest value</option>
+      <option value="rap">Highest RAP</option>
+      <option value="demand">Best demand</option>
+      <option value="name">Name A-Z</option>
+    </select>
+    <select id="demandSelect" aria-label="Demand filter">
+      <option value="all">All demand</option>
+      <option value="3">High or amazing</option>
+      <option value="2">Normal and up</option>
+      <option value="1">Low and up</option>
+    </select>
+    <select id="riskSelect" aria-label="Risk filter">
+      <option value="all">All items</option>
+      <option value="clean">Clean only</option>
+      <option value="rare">Rare only</option>
+      <option value="projected">Projected only</option>
+      <option value="hyped">Hyped only</option>
+    </select>
+  </section>
+
+  <div class="catalog-status" id="catalogStatus">Loading RoliMon's item data...</div>
+  <div class="empty-state" id="emptyState">No items match these filters.</div>
+  <section class="items-grid" id="itemsGrid" aria-label="Limited items"></section>
+  <div class="load-more">
+    <button class="btn btn-primary" id="loadMoreBtn" type="button">Load more</button>
+  </div>
+</main>
+
+<div class="bottom-bar">
+  <div class="footer-links">
+    <a href="/tos.html">Terms of Service</a>
+    <a href="/privacy.html">Privacy Policy</a>
+  </div>
+  <div class="copyright">Rovera (C) 2026 - Not affiliated in any way with the Roblox Corporation or any of its trademarks. Owned by Sparkle (sw8tx).</div>
+</div>
+
+<script src="/rolimons-client.js"></script>
+<script>
+const grid = document.getElementById('itemsGrid');
+const searchInput = document.getElementById('catalogSearch');
+const sortSelect = document.getElementById('sortSelect');
+const demandSelect = document.getElementById('demandSelect');
+const riskSelect = document.getElementById('riskSelect');
+const statusEl = document.getElementById('catalogStatus');
+const emptyState = document.getElementById('emptyState');
+const loadMoreBtn = document.getElementById('loadMoreBtn');
+const statItems = document.getElementById('statItems');
+const statValue = document.getElementById('statValue');
+const statDemand = document.getElementById('statDemand');
+
+let allItems = [];
+let filteredItems = [];
+let visibleCount = 60;
+
+function tagClassForDemand(item) {
+  if (item.demand >= 3) return 'good';
+  if (item.demand <= 1) return 'bad';
+  return '';
+}
+
+function tagClassForTrend(item) {
+  if (item.trend === 3) return 'good';
+  if (item.trend === 0 || item.trend === 1) return 'warn';
+  return '';
+}
+
+function itemTags(item) {
+  const tags = [
+    `<span class="tag ${tagClassForDemand(item)}">Demand: ${item.demandLabel}</span>`,
+    `<span class="tag ${tagClassForTrend(item)}">Trend: ${item.trendLabel}</span>`
+  ];
+  if (item.rare) tags.push('<span class="tag good">Rare</span>');
+  if (item.projected) tags.push('<span class="tag bad">Projected</span>');
+  if (item.hyped) tags.push('<span class="tag warn">Hyped</span>');
+  return tags.join('');
+}
+
+function itemCard(item) {
+  return `
+    <a class="item-card" href="${item.url}" target="_blank">
+      <img class="item-thumb" src="${item.thumbnail}" alt="${item.name}" loading="lazy" onerror="this.onerror=null;this.src='logo.png';">
+      <div class="item-info">
+        <div class="item-name">${item.name}</div>
+        <div class="item-id">ID ${item.id}${item.acronym ? ` / ${item.acronym}` : ''}</div>
+        <div class="value-line">
+          <span>Value<br><strong>${RoveraRoli.formatNumber(item.baseValue)}</strong></span>
+          <span>RAP<br><strong>${RoveraRoli.formatNumber(item.rap)}</strong></span>
+        </div>
+      </div>
+      <div class="item-tags">${itemTags(item)}</div>
+    </a>
+  `;
+}
+
+function updateStats() {
+  const totalValue = allItems.reduce((sum, item) => sum + item.baseValue, 0);
+  const highDemand = allItems.filter(item => item.demand >= 3).length;
+  statItems.textContent = RoveraRoli.formatNumber(allItems.length);
+  statValue.textContent = RoveraRoli.formatNumber(totalValue);
+  statDemand.textContent = RoveraRoli.formatNumber(highDemand);
+}
+
+function applyFilters() {
+  const q = searchInput.value.trim().toLowerCase();
+  const demandMin = demandSelect.value === 'all' ? null : Number(demandSelect.value);
+  const risk = riskSelect.value;
+  const sort = sortSelect.value;
+
+  filteredItems = allItems.filter(item => {
+    if (q && !item.search.includes(q)) return false;
+    if (demandMin !== null && item.demand < demandMin) return false;
+    if (risk === 'clean' && (item.projected || item.hyped)) return false;
+    if (risk === 'rare' && !item.rare) return false;
+    if (risk === 'projected' && !item.projected) return false;
+    if (risk === 'hyped' && !item.hyped) return false;
+    return true;
+  });
+
+  filteredItems.sort((a, b) => {
+    if (sort === 'name') return a.name.localeCompare(b.name);
+    if (sort === 'rap') return b.rap - a.rap;
+    if (sort === 'demand') return (b.demand - a.demand) || (b.baseValue - a.baseValue);
+    return b.baseValue - a.baseValue;
+  });
+
+  visibleCount = Math.min(visibleCount, Math.max(60, filteredItems.length));
+  renderItems();
+}
+
+function renderItems() {
+  const visible = filteredItems.slice(0, visibleCount);
+  grid.innerHTML = visible.map(itemCard).join('');
+  emptyState.classList.toggle('active', filteredItems.length === 0);
+  loadMoreBtn.style.display = visibleCount < filteredItems.length ? 'inline-flex' : 'none';
+  statusEl.innerHTML = `Showing <strong>${RoveraRoli.formatNumber(visible.length)}</strong> of <strong>${RoveraRoli.formatNumber(filteredItems.length)}</strong> matching items.`;
+}
+
+async function initCatalog() {
+  try {
+    allItems = await RoveraRoli.fetchItems();
+    updateStats();
+    applyFilters();
+  } catch (error) {
+    statusEl.textContent = "Could not load RoliMon's item data. Try refreshing in a moment.";
+    loadMoreBtn.style.display = 'none';
+  }
+}
+
+[searchInput, sortSelect, demandSelect, riskSelect].forEach(control => {
+  control.addEventListener('input', () => {
+    visibleCount = 60;
+    applyFilters();
+  });
+});
+
+loadMoreBtn.addEventListener('click', () => {
+  visibleCount += 60;
+  renderItems();
+});
+
+initCatalog();
+</script>
+<script src="/loader.js"></script>
+</body>
+</html>

@@ -3,107 +3,149 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rovera — #1 Roblox Limited Marketplace</title>
+<title>Rovera - Roblox Trade Checker</title>
 
 <link rel="icon" type="image/png" href="logo.png">
-
-<meta property="og:type"        content="website">
-<meta property="og:url"         content="https://rovera.xyz">
-<meta property="og:title"       content="Rovera — #1 Roblox Limited Marketplace">
-<meta property="og:description" content="Rovera is the safest marketplace to buy and sell Roblox limited in-game items from verified sellers directly. Crypto payments, 24/7 support.">
-<meta property="og:image"       content="https://rovera.xyz/logo.png">
-<meta name="theme-color"        content="#0f1e4a">
-<meta name="twitter:card"       content="summary">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://rovera.xyz">
+<meta property="og:title" content="Rovera - Roblox Trade Checker">
+<meta property="og:description" content="Check Roblox limited trades with RoliMon's values, demand, trend, and market risk signals.">
+<meta property="og:image" content="https://rovera.xyz/logo.png">
+<meta name="theme-color" content="#0f1e4a">
+<meta name="twitter:card" content="summary">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg:       #03040f;
-  --bg2:      #060818;
-  --blue:     #1a3a8a;
-  --blue2:    #2a5fd4;
-  --bluelt:   #5bc4ff;
-  --white:    #f0f0f0;
-  --grey:     #555;
-  --border:   #0d0e20;
-  --card:     #0a0b18;
+  --bg: #08090d;
+  --bg2: #11131a;
+  --blue: #3f7f86;
+  --blue2: #67a3a8;
+  --bluelt: #8fd0d4;
+  --white: #f3f5f7;
+  --grey: #9aa2b1;
+  --muted: #687080;
+  --border: #242834;
+  --card: #11131a;
+  --panel: #151820;
+  --good: #4dd889;
+  --warn: #f1c95d;
+  --bad: #ef6676;
 }
 
 body {
-  background: linear-gradient(135deg, var(--bg) 0%, var(--bg2) 50%, var(--bg) 100%);
-  color: var(--white);
-  font-family: 'Space Mono', monospace;
   min-height: 100vh;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  overflow: hidden; position: relative;
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 54%, var(--bg) 100%);
+  color: var(--white);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
 }
 
 body::before {
   content: '';
-  position: fixed; top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: 700px; height: 700px;
-  background: radial-gradient(circle, rgba(30,40,120,0.2) 0%, rgba(20,50,180,0.05) 50%, transparent 70%);
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.025), transparent 38%);
   pointer-events: none;
 }
 
 nav {
-  position: fixed; top: 0; left: 0; right: 0;
-  height: 56px;
-  background: rgba(3,4,15,0.97);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  min-height: 56px;
+  background: rgba(8,9,13,0.96);
   border-bottom: 1px solid var(--border);
   backdrop-filter: blur(12px);
-  display: flex; align-items: center;
+  display: flex;
+  align-items: center;
   justify-content: space-between;
+  gap: 16px;
   padding: 0 32px;
   z-index: 100;
 }
 
 .nav-logo {
-  display: flex; align-items: center; gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
   text-decoration: none;
+  flex-shrink: 0;
 }
 .nav-logo img { width: 28px; height: 28px; object-fit: contain; }
 .nav-logo span {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 20px; letter-spacing: 0.06em;
+  font-size: 20px;
+  letter-spacing: 0.06em;
   color: var(--white);
 }
 
-.nav-right { display: flex; gap: 10px; align-items: center; }
+.nav-right {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.nav-legal {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 4px;
+}
+.nav-legal a {
+  color: var(--grey);
+  font-size: 11px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.nav-legal a:hover { color: var(--bluelt); }
 
 .btn {
-  display: flex; align-items: center; gap: 8px;
-  padding: 8px 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 36px;
+  padding: 8px 16px;
   border-radius: 6px;
   font-family: 'Space Mono', monospace;
-  font-size: 12px; font-weight: 700;
+  font-size: 12px;
+  font-weight: 700;
   letter-spacing: 0.05em;
-  cursor: pointer; border: none;
-  transition: all 0.2s; text-decoration: none;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
 }
-
-.btn-discord {
-  background: transparent;
-  border: 1.5px solid var(--blue);
+.btn-discord,
+.btn-ghost {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border);
   color: var(--white);
 }
-.btn-discord:hover { background: rgba(26,58,138,0.3); border-color: var(--blue2); }
-.btn-discord svg { flex-shrink: 0; }
-
-.btn-login {
+.btn-discord:hover,
+.btn-ghost:hover {
+  background: rgba(103,163,168,0.12);
+  border-color: var(--blue2);
+}
+.btn-primary {
   background: var(--blue);
+  border: 1px solid var(--blue);
   color: var(--white);
 }
-.btn-login:hover { background: var(--blue2); }
+.btn-primary:hover { background: var(--blue2); border-color: var(--blue2); }
+.btn.active { border-color: var(--bluelt); color: var(--bluelt); }
 
 .user-chip {
   display: none;
-  align-items: center; gap: 10px;
+  align-items: center;
+  gap: 10px;
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 24px;
@@ -111,89 +153,577 @@ nav {
   cursor: pointer;
 }
 .user-chip img {
-  width: 32px; height: 32px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   border: 2px solid var(--blue2);
   object-fit: cover;
 }
-.user-chip span { font-size: 11px; letter-spacing: 0.05em; color: var(--white); }
-
-.container { text-align: center; position: relative; z-index: 1; padding-bottom: 80px; }
-
-.dot {
-  width: 7px; height: 7px;
-  background: var(--bluelt); border-radius: 50%;
-  margin: 0 auto 40px;
-  animation: pulse 2s infinite;
+.user-chip span {
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: var(--white);
 }
-@keyframes pulse {
-  0%   { box-shadow: 0 0 0 0 rgba(50,120,220,0.6); background: var(--bluelt); }
-  50%  { background: var(--blue); }
-  70%  { box-shadow: 0 0 0 12px rgba(20,60,180,0); }
-  100% { box-shadow: 0 0 0 0 rgba(20,60,180,0); background: var(--bluelt); }
+
+main {
+  position: relative;
+  z-index: 1;
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 94px 0 104px;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(320px, 1.08fr);
+  gap: 28px;
+  align-items: stretch;
+  min-height: calc(100vh - 180px);
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 480px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  color: var(--bluelt);
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.eyebrow::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--bluelt);
+  box-shadow: 0 0 16px rgba(91,196,255,0.8);
 }
 
 h1 {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(80px, 18vw, 180px);
-  letter-spacing: 0.04em; line-height: 1;
-  margin-bottom: 8px;
+  font-size: clamp(58px, 10vw, 118px);
+  letter-spacing: 0.04em;
+  line-height: 0.9;
 }
 
 .subtitle {
-  font-size: 11px; letter-spacing: 0.35em;
-  color: var(--grey); text-transform: uppercase;
-  margin-bottom: 56px;
+  max-width: 620px;
+  color: var(--grey);
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  line-height: 1.75;
+  margin: 20px 0 26px;
 }
 
-.countdown {
-  display: flex; gap: 8px;
-  justify-content: center; align-items: center;
-  margin-bottom: 64px;
+.signal-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(110px, 1fr));
+  gap: 10px;
+  max-width: 560px;
 }
-.flip-unit { display: flex; flex-direction: column; align-items: center; gap: 10px; }
-.flip-card {
-  width: 72px; height: 80px;
-  background: var(--card); border: 1px solid #141525;
+.signal {
+  min-height: 84px;
+  background: rgba(17,19,26,0.72);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+}
+.signal span {
+  display: block;
+  color: var(--bluelt);
+  font-size: 10px;
+  margin-bottom: 7px;
+}
+.signal strong {
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+}
+
+.checker-shell {
+  background: rgba(17,19,26,0.84);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+  min-height: 620px;
+  align-self: center;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.28);
+}
+
+.checker-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 4px 2px 14px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 14px;
+}
+.checker-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+}
+.live-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--bluelt);
+  border: 1px solid rgba(91,196,255,0.35);
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 10px;
+  white-space: nowrap;
+}
+.live-pill::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--good);
+  box-shadow: 0 0 12px rgba(77,216,137,0.8);
+}
+
+.trade-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.trade-side {
+  min-height: 318px;
+  background: rgba(8,9,13,0.58);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px;
+}
+.side-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.side-head h2 {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+}
+.side-total {
+  color: var(--grey);
+  font-size: 10px;
+}
+.side-total strong {
+  color: var(--white);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+}
+
+.item-search {
+  position: relative;
+  margin-bottom: 12px;
+}
+.item-input {
+  width: 100%;
+  min-height: 44px;
+  background: #10131a;
+  border: 1px solid var(--border);
   border-radius: 6px;
-  display: flex; align-items: center; justify-content: center;
+  color: var(--white);
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  outline: none;
+  padding: 0 42px 0 13px;
+}
+.item-input:focus { border-color: var(--blue2); }
+.add-icon {
+  position: absolute;
+  right: 9px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: rgba(103,163,168,0.12);
+  color: var(--bluelt);
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.suggestions {
+  display: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 6px);
+  z-index: 40;
+  max-height: 280px;
+  overflow-y: auto;
+  background: #10131a;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 18px 38px rgba(0,0,0,0.42);
+}
+.suggestions.active { display: block; }
+.suggestion {
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: var(--white);
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  text-align: left;
+  font-family: 'Inter', sans-serif;
+}
+.suggestion:hover { background: rgba(42,95,212,0.16); }
+.suggestion img {
+  width: 42px;
+  height: 42px;
+  border-radius: 6px;
+  object-fit: contain;
+  background: #101323;
+}
+.suggestion-name {
+  min-width: 0;
+  font-size: 12px;
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.suggestion-meta {
+  display: block;
+  color: var(--muted);
+  font-size: 10px;
+  margin-top: 3px;
+}
+.suggestion-value {
+  font-size: 12px;
+  color: var(--bluelt);
+  white-space: nowrap;
+}
+
+.selected-list {
+  display: grid;
+  gap: 8px;
+  min-height: 180px;
+}
+.selected-empty {
+  display: grid;
+  place-items: center;
+  min-height: 174px;
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  color: var(--muted);
+  font-size: 11px;
+  text-align: center;
+  padding: 18px;
+}
+.trade-item {
+  min-height: 76px;
+  background: #10131a;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 9px;
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr) 28px;
+  gap: 10px;
+  align-items: center;
+}
+.trade-item img {
+  width: 54px;
+  height: 54px;
+  border-radius: 6px;
+  object-fit: contain;
+  background: #111421;
+}
+.trade-item strong {
+  display: block;
+  min-width: 0;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  line-height: 1.25;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.trade-item span {
+  display: block;
+  color: var(--grey);
+  font-size: 10px;
+  margin-top: 4px;
+}
+.remove-item {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: 1px solid #1a1b30;
+  background: transparent;
+  color: var(--grey);
+  cursor: pointer;
+}
+.remove-item:hover {
+  color: var(--bad);
+  border-color: rgba(239,102,118,0.55);
+}
+
+.quick-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+.quick-row button {
+  border: 1px solid #1a1b30;
+  background: rgba(13,14,32,0.78);
+  border-radius: 999px;
+  color: var(--grey);
+  min-height: 28px;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+}
+.quick-row button:hover {
+  border-color: var(--blue2);
+  color: var(--white);
+}
+
+.analyze-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 14px 0;
+}
+.analyze-wrap {
+  position: relative;
+  flex: 1;
+  border-radius: 8px;
+  padding: 0;
   overflow: hidden;
 }
-.flip-card span {
-  font-family: 'Bebas Neue', sans-serif; font-size: 52px;
-  color: var(--white); line-height: 1; user-select: none;
+.analyze-wrap::before {
+  display: none;
 }
-@keyframes flipIn {
-  0%   { transform: rotateX(-90deg); opacity: 0; }
-  100% { transform: rotateX(0deg);   opacity: 1; }
+@keyframes scanBorder { to { transform: rotate(360deg); } }
+.analyze-button {
+  position: relative;
+  width: 100%;
+  min-height: 52px;
+  border: 0;
+  border-radius: 6px;
+  background: linear-gradient(90deg, var(--blue), var(--blue2));
+  color: var(--white);
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  cursor: pointer;
 }
-.flip-card.animate span { animation: flipIn 0.3s ease-out forwards; }
-.unit-label { font-size: 9px; letter-spacing: 0.25em; color: var(--grey); text-transform: uppercase; }
-.sep { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--blue); line-height: 80px; margin-bottom: 28px; opacity: 0.8; }
+.analyze-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+.clear-button {
+  width: 50px;
+  height: 52px;
+  border-radius: 8px;
+  border: 1px solid #1a1b30;
+  background: #0d0e20;
+  color: var(--grey);
+  cursor: pointer;
+  font-size: 18px;
+}
+.clear-button:hover { color: var(--white); border-color: var(--blue2); }
+
+.result-panel {
+  min-height: 154px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: rgba(8,9,13,0.58);
+  padding: 14px;
+}
+.result-idle,
+.result-loading {
+  min-height: 124px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  color: var(--grey);
+  font-size: 12px;
+  line-height: 1.7;
+}
+.result-loading {
+  color: var(--bluelt);
+  gap: 10px;
+}
+.spinner {
+  width: 22px;
+  height: 22px;
+  border: 2px solid #1a2a5a;
+  border-top-color: var(--bluelt);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.verdict {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: start;
+  margin-bottom: 14px;
+}
+.verdict h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 34px;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+.verdict.good h3 { color: var(--good); }
+.verdict.warn h3 { color: var(--warn); }
+.verdict.bad h3 { color: var(--bad); }
+.verdict.fair h3 { color: var(--bluelt); }
+.verdict-score {
+  text-align: right;
+  color: var(--grey);
+  font-size: 10px;
+}
+.verdict-score strong {
+  display: block;
+  color: var(--white);
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  margin-top: 3px;
+}
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.metric {
+  min-height: 68px;
+  border: 1px solid #1a1b30;
+  border-radius: 8px;
+  padding: 10px;
+  background: #0d0e20;
+}
+.metric span {
+  display: block;
+  color: var(--grey);
+  font-size: 10px;
+  margin-bottom: 5px;
+}
+.metric strong {
+  color: var(--white);
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+}
+.reason-list {
+  display: grid;
+  gap: 6px;
+  color: var(--grey);
+  font-size: 11px;
+  line-height: 1.45;
+}
+.reason-list div::before {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--bluelt);
+  margin-right: 8px;
+  vertical-align: 1px;
+}
+
+.market-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+.market-card {
+  min-height: 92px;
+  background: rgba(17,19,26,0.62);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px;
+}
+.market-card span {
+  color: var(--bluelt);
+  display: block;
+  font-size: 10px;
+  margin-bottom: 8px;
+}
+.market-card strong {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-size: 17px;
+  margin-bottom: 5px;
+}
+.market-card small {
+  color: var(--grey);
+  line-height: 1.45;
+}
 
 .bottom-bar {
-  position: fixed; bottom: 0; left: 0; right: 0;
-  background: rgba(3,4,15,0.97);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(8,9,13,0.96);
   border-top: 1px solid var(--border);
-  z-index: 20; padding: 10px 24px 8px;
-  display: flex; flex-direction: column; align-items: center; gap: 7px;
+  z-index: 20;
+  padding: 10px 24px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
 }
-.footer-links { display: flex; gap: 28px; }
+.footer-links {
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 .footer-links a {
-  font-size: 10px; letter-spacing: 0.2em;
-  color: var(--blue); text-decoration: none; text-transform: uppercase;
-  transition: color 0.2s;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--blue2);
+  text-decoration: none;
+  text-transform: uppercase;
 }
 .footer-links a:hover { color: var(--bluelt); }
-.copyright { font-size: 10px; color: #4a5580; letter-spacing: 0.05em; }
+.copyright {
+  font-size: 10px;
+  color: #4a5580;
+  letter-spacing: 0.05em;
+  text-align: center;
+}
 
-/* ===================== MODAL ===================== */
 .overlay {
-  display: none; position: fixed; inset: 0;
+  display: none;
+  position: fixed;
+  inset: 0;
   background: rgba(0,0,0,0.75);
   backdrop-filter: blur(4px);
   z-index: 200;
-  align-items: center; justify-content: center;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
 }
 .overlay.active { display: flex; }
 
@@ -202,120 +732,175 @@ h1 {
   background: #08091a;
   border: 1px solid #141525;
   border-radius: 12px;
-  width: 400px; max-width: 95vw;
+  width: 400px;
+  max-width: 95vw;
   padding: 32px;
   position: relative;
   animation: modalIn 0.2s ease-out both;
 }
 @keyframes modalIn {
   from { opacity: 0; transform: scale(0.96) translateY(10px); }
-  to   { opacity: 1; transform: scale(1) translateY(0); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
 }
 
 .modal-close {
-  position: absolute; top: 16px; right: 16px;
-  background: none; border: none; color: var(--grey);
-  font-size: 18px; cursor: pointer; line-height: 1;
-  transition: color 0.2s;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  color: var(--grey);
+  font-size: 18px;
+  cursor: pointer;
+  line-height: 1;
 }
 .modal-close:hover { color: var(--white); }
 
 .tabs {
-  display: flex; margin-bottom: 24px;
+  display: flex;
+  margin-bottom: 24px;
   border-bottom: 1px solid var(--border);
 }
 .tab {
-  flex: 1; text-align: center;
-  padding: 10px 0; font-size: 13px; letter-spacing: 0.05em;
-  color: var(--grey); cursor: pointer; border: none; background: none;
-  border-bottom: 2px solid transparent; margin-bottom: -1px;
-  transition: all 0.2s; font-family: 'Space Mono', monospace;
+  flex: 1;
+  text-align: center;
+  padding: 10px 0;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  color: var(--grey);
+  cursor: pointer;
+  border: none;
+  background: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: all 0.2s;
+  font-family: 'Space Mono', monospace;
 }
-.tab.active { color: var(--white); border-bottom-color: var(--blue2); }
+.tab.active {
+  color: var(--white);
+  border-bottom-color: var(--blue2);
+}
 
 .modal-title {
-  font-size: 16px; font-weight: 600;
-  letter-spacing: 0.02em; color: var(--white);
-  margin-bottom: 20px; text-align: center;
-  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 .field {
-  width: 100%; background: #0d0e20;
-  border: 1px solid #1a1b30; border-radius: 6px;
-  padding: 12px 14px; color: var(--white);
-  font-family: 'Inter', sans-serif; font-size: 13px;
-  margin-bottom: 12px; outline: none;
-  transition: border-color 0.2s;
+  width: 100%;
+  background: #0d0e20;
+  border: 1px solid #1a1b30;
+  border-radius: 6px;
+  padding: 12px 14px;
+  color: var(--white);
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  margin-bottom: 12px;
+  outline: none;
 }
 .field:focus { border-color: var(--blue2); }
-.field::placeholder { color: #333; }
-
+.field::placeholder { color: #4b506a; }
 .field-wrap { position: relative; margin-bottom: 12px; }
-.field-wrap .field { margin-bottom: 0; }
+.field-wrap .field { margin-bottom: 0; padding-right: 42px; }
 .eye {
-  position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
-  background: none; border: none; color: var(--grey); cursor: pointer;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--grey);
+  cursor: pointer;
   font-size: 14px;
 }
 
 .agree-row {
-  display: flex; align-items: flex-start; gap: 10px;
-  margin-bottom: 16px; font-size: 10px; color: var(--grey); line-height: 1.5;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 16px;
+  font-size: 10px;
+  color: var(--grey);
+  line-height: 1.5;
 }
-.agree-row input[type=checkbox] { margin-top: 2px; flex-shrink: 0; accent-color: var(--blue2); }
-.agree-row a { color: var(--blue2); text-decoration: none; }
+.agree-row input[type=checkbox] {
+  margin-top: 2px;
+  flex-shrink: 0;
+  accent-color: var(--blue2);
+}
+.agree-row a {
+  color: var(--blue2);
+  text-decoration: none;
+}
 .agree-row a:hover { color: var(--bluelt); }
 
 .btn-full {
-  width: 100%; padding: 13px; border-radius: 6px;
-  background: var(--blue); color: var(--white);
-  font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700;
-  letter-spacing: 0.05em; cursor: pointer; border: none;
-  transition: background 0.2s;
+  width: 100%;
+  padding: 13px;
+  border-radius: 6px;
+  background: var(--blue);
+  color: var(--white);
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  border: none;
 }
 .btn-full:hover { background: var(--blue2); }
 .btn-full:disabled { opacity: 0.4; cursor: not-allowed; }
 
 .forgot-link {
-  display: block; text-align: right;
-  font-size: 10px; color: var(--blue2);
-  text-decoration: none; margin-bottom: 16px;
-  cursor: pointer; transition: color 0.2s;
+  display: block;
+  text-align: right;
+  font-size: 10px;
+  color: var(--blue2);
+  text-decoration: none;
+  margin-bottom: 16px;
+  cursor: pointer;
 }
 .forgot-link:hover { color: var(--bluelt); }
 
-.err { font-size: 11px; color: #e05555; margin-bottom: 10px; text-align: center; min-height: 16px; }
-
+.err {
+  font-size: 11px;
+  color: var(--bad);
+  margin-bottom: 10px;
+  text-align: center;
+  min-height: 16px;
+}
 .verify-step { display: none; }
 .verify-step.active { display: block; }
-
 .welcome-title {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 26px; letter-spacing: 0.04em;
+  font-size: 26px;
+  letter-spacing: 0.04em;
   margin-bottom: 6px;
 }
 .welcome-title span { color: var(--bluelt); }
-
-.verify-desc { font-size: 11px; color: #aaa; line-height: 1.7; margin-bottom: 16px; }
-
-/* Roblox confirm card (yellow ring) */
+.verify-desc {
+  font-size: 11px;
+  color: #aaa;
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
 .roblox-card {
   background: #0d0e20;
-  border: 2px solid #f5c518;
-  border-radius: 12px;
+  border: 2px solid #f1c95d;
+  border-radius: 8px;
   padding: 20px;
-  display: flex; align-items: center; gap: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
   margin: 16px 0;
-  animation: modalIn 0.25s ease-out both;
-}
-.roblox-avatar-wrap {
-  position: relative; flex-shrink: 0;
 }
 .roblox-avatar {
-  width: 64px; height: 64px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
-  border: 3px solid #f5c518;
+  border: 3px solid #f1c95d;
   object-fit: cover;
   background: #1a1b30;
 }
@@ -323,209 +908,321 @@ h1 {
 .roblox-name { font-size: 15px; font-weight: 700; color: var(--white); }
 .roblox-handle { font-size: 11px; color: #aaa; }
 .roblox-id { font-size: 10px; color: #555; }
-
-/* Phrase box */
 .phrase-box {
-  background: #0d0e20; border: 1px solid #1a1b30; border-radius: 6px;
-  padding: 14px 40px 14px 14px; position: relative;
-  font-size: 12px; color: #8899cc; line-height: 1.5;
-  margin-bottom: 8px; font-weight: 700;
+  background: #0d0e20;
+  border: 1px solid #1a1b30;
+  border-radius: 6px;
+  padding: 14px 40px 14px 14px;
+  position: relative;
+  font-size: 12px;
+  color: #8899cc;
+  line-height: 1.5;
+  margin-bottom: 8px;
+  font-weight: 700;
 }
 .copy-btn {
-  position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
-  background: none; border: none; color: var(--grey); cursor: pointer; font-size: 16px;
-  transition: color 0.2s;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--grey);
+  cursor: pointer;
+  font-size: 16px;
 }
 .copy-btn:hover { color: var(--bluelt); }
-
 .new-phrase-btn {
-  background: none; border: none; color: var(--grey);
-  font-family: 'Space Mono', monospace; font-size: 10px;
-  cursor: pointer; display: flex; align-items: center; gap: 6px;
-  margin: 0 auto 16px; transition: color 0.2s;
+  background: none;
+  border: none;
+  color: var(--grey);
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 auto 16px;
 }
 .new-phrase-btn:hover { color: var(--bluelt); }
-
-.open-roblox-btn {
-  width: 100%; padding: 11px; border-radius: 6px;
-  background: #0d0e20; border: 1px solid #1a1b30;
-  color: #888; font-family: 'Space Mono', monospace;
-  font-size: 11px; cursor: pointer; transition: all 0.2s;
-  display: flex; align-items: center; justify-content: center; gap: 8px;
-  margin-bottom: 12px; text-decoration: none;
+.open-roblox-btn,
+.btn-outline {
+  width: 100%;
+  padding: 11px;
+  border-radius: 6px;
+  background: #0d0e20;
+  border: 1px solid #1a1b30;
+  color: #888;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  text-decoration: none;
 }
-.open-roblox-btn:hover { border-color: var(--blue2); color: var(--white); }
-
-/* Code input boxes */
+.btn-outline {
+  margin-top: 8px;
+  margin-bottom: 0;
+}
+.open-roblox-btn:hover,
+.btn-outline:hover {
+  border-color: var(--blue2);
+  color: var(--white);
+}
 .code-boxes {
-  display: flex; gap: 8px; justify-content: center;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
   margin-bottom: 16px;
 }
 .code-box {
-  width: 44px; height: 52px;
-  background: #0d0e20; border: 1.5px solid #1a1b30;
+  width: 44px;
+  height: 52px;
+  background: #0d0e20;
+  border: 1.5px solid #1a1b30;
   border-radius: 8px;
-  font-family: 'Bebas Neue', sans-serif; font-size: 28px;
-  color: var(--bluelt); text-align: center;
-  outline: none; transition: border-color 0.2s;
-  caret-color: var(--bluelt);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  color: var(--bluelt);
+  text-align: center;
+  outline: none;
 }
-.code-box:focus { border-color: var(--blue2); }
-.code-box.filled { border-color: var(--blue2); }
-
-.btn-outline {
-  width: 100%; padding: 11px; border-radius: 6px;
-  background: transparent; border: 1px solid #1a1b30;
-  color: var(--grey); font-family: 'Space Mono', monospace;
-  font-size: 12px; cursor: pointer; transition: all 0.2s; margin-top: 8px;
-}
-.btn-outline:hover { border-color: var(--grey); color: var(--white); }
-
-.step-hint {
-  font-size: 10px; color: #333; letter-spacing: 0.1em;
-  text-align: center; margin-bottom: 12px;
+.code-box:focus,
+.code-box.filled {
+  border-color: var(--blue2);
 }
 
-.container { animation: fadeUp 0.8s ease both; }
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
+@media (max-width: 1040px) {
+  nav {
+    position: static;
+    padding: 14px 18px;
+    align-items: flex-start;
+  }
+  main {
+    width: min(100% - 28px, 1180px);
+    padding-top: 34px;
+  }
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+  .intro {
+    min-height: 0;
+  }
 }
 
-.spinner-row {
-  display: flex; align-items: center; gap: 8px;
-  justify-content: center; color: #6699ff;
-  font-size: 11px; margin-bottom: 10px; min-height: 16px;
+@media (max-width: 720px) {
+  nav {
+    flex-direction: column;
+  }
+  .nav-right {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  .nav-legal {
+    width: 100%;
+    padding: 2px 0 0;
+  }
+  .btn {
+    flex: 1 1 calc(50% - 10px);
+    padding: 8px 10px;
+    font-size: 11px;
+  }
+  .signal-row,
+  .trade-grid,
+  .metrics,
+  .market-strip {
+    grid-template-columns: 1fr;
+  }
+  .checker-shell {
+    padding: 10px;
+  }
+  .bottom-bar {
+    position: static;
+    margin-top: 34px;
+  }
 }
-.spinner {
-  width: 14px; height: 14px;
-  border: 2px solid #1a2a5a;
-  border-top-color: #5bc4ff;
-  border-radius: 50%;
-  animation: spin 0.7s linear infinite;
-  flex-shrink: 0;
+
+@media (max-width: 460px) {
+  h1 { font-size: 72px; }
+  .checker-head,
+  .verdict {
+    grid-template-columns: 1fr;
+    display: grid;
+  }
+  .live-pill,
+  .verdict-score {
+    justify-self: start;
+    text-align: left;
+  }
+  .code-box {
+    width: 38px;
+  }
 }
-@keyframes spin { to { transform: rotate(360deg); } }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <a href="/" class="nav-logo">
     <img src="logo.png" alt="Rovera">
     <span>ROVERA</span>
   </a>
   <div class="nav-right">
+    <a href="/index.html" class="btn btn-ghost active">Trade Checker</a>
+    <a href="/catalog.html" class="btn btn-ghost">Catalog</a>
+    <div class="nav-legal" aria-label="Legal pages">
+      <a href="/privacy.html">Privacy</a>
+      <a href="/tos.html">Terms</a>
+    </div>
+    <button class="btn btn-ghost" id="profileBtn" type="button" onclick="openModal('signin')">Profile</button>
     <a href="https://discord.gg/rovera" target="_blank" class="btn btn-discord">
-      <svg width="16" height="12" viewBox="0 0 127.14 96.36" fill="currentColor">
-        <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/>
+      <svg width="16" height="12" viewBox="0 0 127.14 96.36" fill="currentColor" aria-hidden="true">
+        <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/>
       </svg>
       Discord
     </a>
-    <button class="btn btn-login" id="loginBtn" onclick="openModal('signin')">Log in</button>
-    <div class="user-chip" id="userChip" onclick="logout()">
+    <button class="btn btn-primary" id="loginBtn" type="button" onclick="openModal('signin')">Log in</button>
+    <div class="user-chip" id="userChip" onclick="logout()" title="Click to log out">
       <img id="chipAvatar" src="" alt="">
       <span id="chipName"></span>
     </div>
   </div>
 </nav>
 
-<!-- HERO -->
-<div class="container">
-  <div class="dot"></div>
-  <h1>ROVERA</h1>
-  <p class="subtitle">Coming Soon</p>
-  <div class="countdown">
-    <div class="flip-unit">
-      <div class="flip-card" id="card-days"><span id="num-days">0</span></div>
-      <span class="unit-label">Days</span>
+<main>
+  <section class="hero">
+    <div class="intro">
+      <div class="eyebrow">RoliMon's powered</div>
+      <h1>Trade<br>Checker</h1>
+      <p class="subtitle">Drop limiteds on both sides and Rovera compares value, RAP, demand, trend, projected status, hype, rarity, and market reputation before calling the trade good or bad.</p>
+      <div class="signal-row">
+        <div class="signal"><span>Items loaded</span><strong id="loadedItems">-</strong></div>
+        <div class="signal"><span>Market source</span><strong>RoliMon's</strong></div>
+        <div class="signal"><span>Trade balance</span><strong>Weighted</strong></div>
+      </div>
     </div>
-    <div class="sep">:</div>
-    <div class="flip-unit">
-      <div class="flip-card" id="card-hours"><span id="num-hours">0</span></div>
-      <span class="unit-label">Hours</span>
-    </div>
-    <div class="sep">:</div>
-    <div class="flip-unit">
-      <div class="flip-card" id="card-minutes"><span id="num-minutes">0</span></div>
-      <span class="unit-label">Minutes</span>
-    </div>
-    <div class="sep">:</div>
-    <div class="flip-unit">
-      <div class="flip-card" id="card-seconds"><span id="num-seconds">0</span></div>
-      <span class="unit-label">Seconds</span>
-    </div>
-  </div>
-</div>
 
-<!-- BOTTOM BAR -->
+    <div class="checker-shell">
+      <div class="checker-head">
+        <div class="checker-title">AI Trade Bot</div>
+        <div class="live-pill" id="dataStatus">Loading data</div>
+      </div>
+
+      <div class="trade-grid">
+        <section class="trade-side">
+          <div class="side-head">
+            <h2>You give</h2>
+            <div class="side-total">Value <strong id="giveTotal">0</strong></div>
+          </div>
+          <div class="item-search">
+            <input class="item-input" id="giveInput" type="search" autocomplete="off" placeholder="Search item name or ID">
+            <div class="add-icon">+</div>
+            <div class="suggestions" id="giveSuggestions"></div>
+          </div>
+          <div class="selected-list" id="giveList"></div>
+          <div class="quick-row" id="giveQuick"></div>
+        </section>
+
+        <section class="trade-side">
+          <div class="side-head">
+            <h2>You receive</h2>
+            <div class="side-total">Value <strong id="receiveTotal">0</strong></div>
+          </div>
+          <div class="item-search">
+            <input class="item-input" id="receiveInput" type="search" autocomplete="off" placeholder="Search item name or ID">
+            <div class="add-icon">+</div>
+            <div class="suggestions" id="receiveSuggestions"></div>
+          </div>
+          <div class="selected-list" id="receiveList"></div>
+          <div class="quick-row" id="receiveQuick"></div>
+        </section>
+      </div>
+
+      <div class="analyze-row">
+        <div class="analyze-wrap">
+          <button class="analyze-button" id="analyzeBtn" type="button">Analyze Trade</button>
+        </div>
+        <button class="clear-button" type="button" id="clearTradeBtn" title="Clear trade">x</button>
+      </div>
+
+      <section class="result-panel" id="resultPanel">
+        <div class="result-idle">Add items to both sides, then run the analysis.</div>
+      </section>
+
+      <div class="market-strip">
+        <div class="market-card"><span>Demand</span><strong id="marketDemand">-</strong><small>Weighted by item value.</small></div>
+        <div class="market-card"><span>Reputation</span><strong id="marketReputation">-</strong><small>Clean demand, trend, and risk balance.</small></div>
+        <div class="market-card"><span>Risk flags</span><strong id="marketRisk">-</strong><small>Projected, hyped, and unstable items.</small></div>
+        <div class="market-card"><span>Delta</span><strong id="marketDelta">-</strong><small>Risk-adjusted receiving edge.</small></div>
+      </div>
+    </div>
+  </section>
+</main>
+
 <div class="bottom-bar">
   <div class="footer-links">
     <a href="/tos.html">Terms of Service</a>
     <a href="/privacy.html">Privacy Policy</a>
   </div>
-  <div class="copyright">Rovera © 2026 — Not affiliated in any way with the Roblox Corporation or any of its trademarks. Owned by Sparkle (sw8tx).</div>
+  <div class="copyright">Rovera (C) 2026 - Not affiliated in any way with the Roblox Corporation or any of its trademarks. Owned by Sparkle (sw8tx).</div>
 </div>
 
-<!-- ======== MODAL ======== -->
 <div class="overlay" id="overlay" onclick="overlayClick(event)">
 <div class="modal" id="modal">
-  <button class="modal-close" onclick="closeModal()">✕</button>
+  <button class="modal-close" type="button" onclick="closeModal()">x</button>
 
-  <!-- STEP 1: AUTH FORMS -->
   <div id="stepAuth" class="verify-step active">
     <div style="display:flex;justify-content:center;margin-bottom:12px">
-      <div style="width:8px;height:8px;border-radius:50%;background:#5bc4ff;animation:pulse 2s infinite"></div>
+      <div style="width:8px;height:8px;border-radius:50%;background:#5bc4ff;box-shadow:0 0 16px rgba(91,196,255,0.8)"></div>
     </div>
     <div class="tabs">
-      <button class="tab" id="tabSignin" onclick="switchTab('signin')">Sign in</button>
-      <button class="tab" id="tabSignup" onclick="switchTab('signup')">Sign up</button>
+      <button class="tab" id="tabSignin" type="button" onclick="switchTab('signin')">Sign in</button>
+      <button class="tab" id="tabSignup" type="button" onclick="switchTab('signup')">Sign up</button>
     </div>
 
-    <!-- SIGN IN -->
     <div id="formSignin">
       <div class="modal-title">Welcome back</div>
       <input class="field" id="si-username" type="text" placeholder="Roblox username" autocomplete="off">
       <div class="field-wrap">
         <input class="field" id="si-password" type="password" placeholder="Password">
-        <button class="eye" onclick="togglePw('si-password', this)">👁</button>
+        <button class="eye" type="button" onclick="togglePw('si-password', this)">show</button>
       </div>
       <span class="forgot-link" onclick="forgotPassword()">Forgot your password?</span>
       <div class="err" id="si-err"></div>
-      <button class="btn-full" onclick="doSignin()">Sign in</button>
+      <button class="btn-full" type="button" onclick="doSignin()">Sign in</button>
     </div>
 
-    <!-- SIGN UP -->
     <div id="formSignup" style="display:none">
       <div class="modal-title">Create new account</div>
       <input class="field" id="su-username" type="text" placeholder="Roblox username" autocomplete="off">
       <input class="field" id="su-email" type="email" placeholder="Your email address">
       <div class="field-wrap">
         <input class="field" id="su-password" type="password" placeholder="Password">
-        <button class="eye" onclick="togglePw('su-password', this)">👁</button>
+        <button class="eye" type="button" onclick="togglePw('su-password', this)">show</button>
       </div>
       <div class="field-wrap">
         <input class="field" id="su-password2" type="password" placeholder="Repeat password">
-        <button class="eye" onclick="togglePw('su-password2', this)">👁</button>
+        <button class="eye" type="button" onclick="togglePw('su-password2', this)">show</button>
       </div>
       <div class="agree-row">
         <input type="checkbox" id="agreeBox">
         <label for="agreeBox">By creating an account you agree to our <a href="/tos.html" target="_blank">Terms of Service</a> and <a href="/privacy.html" target="_blank">Privacy Policy</a></label>
       </div>
       <div class="err" id="su-err"></div>
-      <button class="btn-full" onclick="doSignup()">Create Rovera Account</button>
+      <button class="btn-full" type="button" onclick="doSignup()">Create Rovera Account</button>
     </div>
   </div>
 
-  <!-- STEP 2: ROBLOX ACCOUNT CONFIRM -->
   <div id="stepRoblox" class="verify-step">
     <div class="welcome-title">Is this <span>you?</span></div>
-    <p class="verify-desc">We found this Roblox account. Confirm it's yours to continue.</p>
+    <p class="verify-desc">We found this Roblox account. Confirm it is yours to continue.</p>
     <div class="roblox-card">
-      <div class="roblox-avatar-wrap">
-        <img class="roblox-avatar" id="robloxAvatar" src="logo.png" alt="">
-      </div>
+      <img class="roblox-avatar" id="robloxAvatar" src="logo.png" alt="">
       <div class="roblox-info">
         <div class="roblox-name" id="robloxName"></div>
         <div class="roblox-handle" id="robloxHandle"></div>
@@ -533,33 +1230,29 @@ h1 {
       </div>
     </div>
     <div class="err" id="rx-err"></div>
-    <button class="btn-full" onclick="confirmRoblox()">Yes, it's me</button>
-    <button class="btn-outline" onclick="showStep('stepAuth'); switchTab('signup')">No, try again</button>
+    <button class="btn-full" type="button" onclick="confirmRoblox()">Yes, it's me</button>
+    <button class="btn-outline" type="button" onclick="showStep('stepAuth'); switchTab('signup')">No, try again</button>
   </div>
 
-  <!-- STEP 3: BIO PASSPHRASE -->
   <div id="stepBio" class="verify-step">
     <div class="welcome-title">Verify <span>ownership</span></div>
-    <p class="verify-desc">Copy this passphrase and paste it into your Roblox profile bio. Then click Verify below.</p>
+    <p class="verify-desc">Copy this passphrase into your Roblox profile bio, save it, then verify.</p>
     <div class="phrase-box" id="phraseBox">
       <span id="phraseText"></span>
-      <button class="copy-btn" onclick="copyPhrase()" title="Copy">⎘</button>
+      <button class="copy-btn" type="button" onclick="copyPhrase()" title="Copy">copy</button>
     </div>
-    <button class="new-phrase-btn" onclick="generatePhrase()">↻ New phrase</button>
-    <a class="open-roblox-btn" id="openRobloxBtn" href="https://www.roblox.com/users/profile" target="_blank">
-      🔗 Open Roblox profile
-    </a>
+    <button class="new-phrase-btn" type="button" onclick="generatePhrase()">New phrase</button>
+    <a class="open-roblox-btn" id="openRobloxBtn" href="https://www.roblox.com/users/profile" target="_blank">Open Roblox profile</a>
     <div class="err" id="bio-err"></div>
-    <button class="btn-full" id="bioVerifyBtn" onclick="doBioVerify()">Verify bio</button>
+    <button class="btn-full" id="bioVerifyBtn" type="button" onclick="doBioVerify()">Verify bio</button>
   </div>
 
-  <!-- STEP 4: EMAIL CODE -->
   <div id="stepEmail" class="verify-step">
     <div class="welcome-title">Check your <span>email</span></div>
     <p class="verify-desc" id="emailDesc">We sent a 6-digit code to your email address. Enter it below.</p>
     <div style="text-align:center;margin-bottom:20px">
       <div id="sentEmailDisplay" style="font-size:12px;color:#5bc4ff;letter-spacing:0.05em;margin-bottom:4px"></div>
-      <div style="font-size:10px;color:#333">Check your spam folder if you don't see it</div>
+      <div style="font-size:10px;color:#555">Check your spam folder if you do not see it</div>
     </div>
     <div class="code-boxes" id="codeBoxes">
       <input class="code-box" maxlength="1" type="text" inputmode="numeric" pattern="[0-9]">
@@ -569,45 +1262,284 @@ h1 {
       <input class="code-box" maxlength="1" type="text" inputmode="numeric" pattern="[0-9]">
       <input class="code-box" maxlength="1" type="text" inputmode="numeric" pattern="[0-9]">
     </div>
-    <button class="new-phrase-btn" onclick="resendCode()" style="margin-bottom:16px">↻ Resend code</button>
+    <button class="new-phrase-btn" type="button" onclick="resendCode()" style="margin-bottom:16px">Resend code</button>
     <div class="err" id="email-err"></div>
-    <button class="btn-full" id="codeVerifyBtn" onclick="doCodeVerify()">Verify code</button>
+    <button class="btn-full" id="codeVerifyBtn" type="button" onclick="doCodeVerify()">Verify code</button>
   </div>
-
 </div>
 </div>
 
+<script src="/rolimons-client.js"></script>
 <script>
-// ======= SPINNER =======
+const tradeState = { give: [], receive: [] };
+const dom = {
+  loadedItems: document.getElementById('loadedItems'),
+  dataStatus: document.getElementById('dataStatus'),
+  giveInput: document.getElementById('giveInput'),
+  receiveInput: document.getElementById('receiveInput'),
+  giveSuggestions: document.getElementById('giveSuggestions'),
+  receiveSuggestions: document.getElementById('receiveSuggestions'),
+  giveList: document.getElementById('giveList'),
+  receiveList: document.getElementById('receiveList'),
+  giveTotal: document.getElementById('giveTotal'),
+  receiveTotal: document.getElementById('receiveTotal'),
+  analyzeBtn: document.getElementById('analyzeBtn'),
+  clearTradeBtn: document.getElementById('clearTradeBtn'),
+  resultPanel: document.getElementById('resultPanel'),
+  giveQuick: document.getElementById('giveQuick'),
+  receiveQuick: document.getElementById('receiveQuick'),
+  marketDemand: document.getElementById('marketDemand'),
+  marketReputation: document.getElementById('marketReputation'),
+  marketRisk: document.getElementById('marketRisk'),
+  marketDelta: document.getElementById('marketDelta')
+};
+
 function showSpinner(errId, msg) {
   const el = document.getElementById(errId);
-  el.innerHTML = `<div class="spinner-row"><div class="spinner"></div><span>${msg}</span></div>`;
+  el.innerHTML = `<div style="display:flex;align-items:center;gap:8px;justify-content:center;color:#5bc4ff"><div class="spinner" style="width:14px;height:14px"></div><span>${msg}</span></div>`;
 }
 
-// ======= COUNTDOWN =======
-const TARGET = new Date('2026-06-04T16:00:00');
-const prev = { days:-1, hours:-1, minutes:-1, seconds:-1 };
-function setVal(unit, val) {
-  if (prev[unit] === val) return;
-  prev[unit] = val;
-  const card = document.getElementById('card-'+unit);
-  const num  = document.getElementById('num-'+unit);
-  num.textContent = String(val);
-  card.classList.remove('animate');
-  void card.offsetWidth;
-  card.classList.add('animate');
+function apiUrl() {
+  if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+    return 'http://localhost:3000/roblox';
+  }
+  return '/roblox';
 }
-function tick() {
-  const diff = TARGET - new Date();
-  if (diff <= 0) { ['days','hours','minutes','seconds'].forEach(u=>setVal(u,0)); return; }
-  setVal('days',    Math.floor(diff/86400000));
-  setVal('hours',   Math.floor((diff%86400000)/3600000));
-  setVal('minutes', Math.floor((diff%3600000)/60000));
-  setVal('seconds', Math.floor((diff%60000)/1000));
-}
-tick(); setInterval(tick, 1000);
 
-// ======= MODAL STATE =======
+async function apiCall(action, payload) {
+  try {
+    const r = await fetch(apiUrl(), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action, ...payload })
+    });
+    if (!r.ok) return null;
+    const d = await r.json();
+    return d.error ? null : d;
+  } catch {
+    return null;
+  }
+}
+
+(async () => {
+  try {
+    await fetch(apiUrl(), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'track', referrer: document.referrer || 'direct' })
+    });
+  } catch {}
+})();
+
+function sumSide(side) {
+  return tradeState[side].reduce((sum, item) => sum + RoveraRoli.valueForItem(item), 0);
+}
+
+function selectedIds() {
+  return new Set([...tradeState.give, ...tradeState.receive].map(item => item.id));
+}
+
+function renderSelected(side) {
+  const list = side === 'give' ? dom.giveList : dom.receiveList;
+  const items = tradeState[side];
+  if (!items.length) {
+    list.innerHTML = `<div class="selected-empty">Search an item and click it to add it here.</div>`;
+  } else {
+    list.innerHTML = items.map((item, index) => `
+      <div class="trade-item">
+        <img src="${item.thumbnail}" alt="${item.name}" loading="lazy" onerror="this.onerror=null;this.src='logo.png';">
+        <div>
+          <strong>${item.name}</strong>
+          <span>Value ${RoveraRoli.formatNumber(item.baseValue)} / RAP ${RoveraRoli.formatNumber(item.rap)} / ${item.demandLabel}</span>
+        </div>
+        <button class="remove-item" type="button" onclick="removeTradeItem('${side}', ${index})">x</button>
+      </div>
+    `).join('');
+  }
+
+  dom.giveTotal.textContent = RoveraRoli.formatNumber(sumSide('give'));
+  dom.receiveTotal.textContent = RoveraRoli.formatNumber(sumSide('receive'));
+  updateMarketPreview();
+}
+
+function updateMarketPreview(analysis) {
+  if (!tradeState.give.length && !tradeState.receive.length) {
+    dom.marketDemand.textContent = '-';
+    dom.marketReputation.textContent = '-';
+    dom.marketRisk.textContent = '-';
+    dom.marketDelta.textContent = '-';
+    return;
+  }
+
+  const give = RoveraRoli.summarize(tradeState.give);
+  const receive = RoveraRoli.summarize(tradeState.receive);
+  const projected = receive.projected + give.projected;
+  const hyped = receive.hyped + give.hyped;
+  const delta = analysis ? analysis.adjustedDelta : receive.adjusted - give.adjusted;
+  dom.marketDemand.textContent = `${receive.weightedDemand.toFixed(2)} vs ${give.weightedDemand.toFixed(2)}`;
+  dom.marketReputation.textContent = `${receive.reputation}/100`;
+  dom.marketRisk.textContent = `${projected} projected, ${hyped} hyped`;
+  dom.marketDelta.textContent = `${delta >= 0 ? '+' : '-'}${RoveraRoli.formatNumber(Math.abs(delta))}`;
+}
+
+function addTradeItem(side, item) {
+  if (!item || tradeState[side].some(existing => existing.id === item.id)) return;
+  tradeState[side].push(item);
+  renderSelected(side);
+  dom.resultPanel.innerHTML = `<div class="result-idle">Ready when both trade sides have at least one item.</div>`;
+}
+
+function removeTradeItem(side, index) {
+  tradeState[side].splice(index, 1);
+  renderSelected(side);
+}
+
+function clearTrade() {
+  tradeState.give = [];
+  tradeState.receive = [];
+  renderSelected('give');
+  renderSelected('receive');
+  dom.resultPanel.innerHTML = `<div class="result-idle">Add items to both sides, then run the analysis.</div>`;
+}
+
+function hideSuggestions() {
+  dom.giveSuggestions.classList.remove('active');
+  dom.receiveSuggestions.classList.remove('active');
+}
+
+function suggestionMarkup(item, side) {
+  return `
+    <button class="suggestion" type="button" data-side="${side}" data-id="${item.id}">
+      <img src="${item.thumbnail}" alt="" onerror="this.onerror=null;this.src='logo.png';">
+      <span>
+        <span class="suggestion-name">${item.name}</span>
+        <span class="suggestion-meta">${item.demandLabel} demand / ${item.trendLabel}</span>
+      </span>
+      <span class="suggestion-value">${RoveraRoli.formatNumber(item.baseValue)}</span>
+    </button>
+  `;
+}
+
+function renderSuggestions(side, query) {
+  const box = side === 'give' ? dom.giveSuggestions : dom.receiveSuggestions;
+  const taken = selectedIds();
+  const matches = RoveraRoli.search(query, 9).filter(item => !taken.has(item.id));
+  box.innerHTML = matches.length
+    ? matches.map(item => suggestionMarkup(item, side)).join('')
+    : `<button class="suggestion" type="button" disabled><span></span><span class="suggestion-name">No match found</span><span></span></button>`;
+  box.classList.add('active');
+}
+
+function wireSearch(input, side) {
+  input.addEventListener('input', () => renderSuggestions(side, input.value));
+  input.addEventListener('focus', () => renderSuggestions(side, input.value));
+  input.addEventListener('keydown', e => {
+    if (e.key !== 'Enter') return;
+    e.preventDefault();
+    const item = RoveraRoli.findItem(input.value);
+    if (item) {
+      addTradeItem(side, item);
+      input.value = '';
+      hideSuggestions();
+    }
+  });
+}
+
+document.addEventListener('click', e => {
+  const button = e.target.closest('.suggestion[data-id]');
+  if (button) {
+    const side = button.dataset.side;
+    const item = RoveraRoli.getById(button.dataset.id);
+    addTradeItem(side, item);
+    (side === 'give' ? dom.giveInput : dom.receiveInput).value = '';
+    hideSuggestions();
+    return;
+  }
+  if (!e.target.closest('.item-search')) hideSuggestions();
+});
+
+function renderQuickPicks() {
+  const picks = RoveraRoli.getItems()
+    .filter(item => item.baseValue >= 10000 && !item.projected)
+    .slice(0, 5);
+
+  function buttons(side) {
+    return picks.map(item => `<button type="button" data-side="${side}" data-id="${item.id}">${item.acronym || item.name.split(' ').slice(0, 2).join(' ')}</button>`).join('');
+  }
+
+  dom.giveQuick.innerHTML = buttons('give');
+  dom.receiveQuick.innerHTML = buttons('receive');
+
+  [dom.giveQuick, dom.receiveQuick].forEach(row => {
+    row.addEventListener('click', e => {
+      const btn = e.target.closest('button[data-id]');
+      if (!btn) return;
+      addTradeItem(btn.dataset.side, RoveraRoli.getById(btn.dataset.id));
+    });
+  });
+}
+
+function renderResult(analysis) {
+  const deltaLabel = `${analysis.adjustedDelta >= 0 ? '+' : '-'}${RoveraRoli.formatNumber(Math.abs(analysis.adjustedDelta))}`;
+  const percentLabel = `${analysis.percent >= 0 ? '+' : ''}${(analysis.percent * 100).toFixed(1)}%`;
+  const repLabel = `${analysis.receive.reputation}/100 vs ${analysis.give.reputation}/100`;
+
+  dom.resultPanel.innerHTML = `
+    <div class="verdict ${analysis.tone}">
+      <div>
+        <h3>${analysis.verdict}</h3>
+        <div style="color:#7d859f;font-size:12px;line-height:1.55">Rovera checked value, demand, trend, reputation, projected flags, hype, and rarity.</div>
+      </div>
+      <div class="verdict-score">Edge<strong>${percentLabel}</strong></div>
+    </div>
+    <div class="metrics">
+      <div class="metric"><span>Value delta</span><strong>${analysis.rawDelta >= 0 ? '+' : '-'}${RoveraRoli.formatNumber(Math.abs(analysis.rawDelta))}</strong></div>
+      <div class="metric"><span>Adjusted edge</span><strong>${deltaLabel}</strong></div>
+      <div class="metric"><span>Reputation</span><strong>${repLabel}</strong></div>
+    </div>
+    <div class="reason-list">
+      ${analysis.reasons.slice(0, 6).map(reason => `<div>${reason}</div>`).join('')}
+    </div>
+  `;
+  updateMarketPreview(analysis);
+}
+
+async function analyzeTrade() {
+  if (!tradeState.give.length || !tradeState.receive.length) {
+    dom.resultPanel.innerHTML = `<div class="result-idle">Both sides need at least one item.</div>`;
+    return;
+  }
+
+  dom.analyzeBtn.disabled = true;
+  dom.resultPanel.innerHTML = `<div class="result-loading"><div class="spinner"></div><div>Scanning values, demand, trend, and risk...</div></div>`;
+  await new Promise(resolve => setTimeout(resolve, 850));
+  const analysis = RoveraRoli.analyzeTrade(tradeState.give, tradeState.receive);
+  renderResult(analysis);
+  dom.analyzeBtn.disabled = false;
+}
+
+async function initTradeChecker() {
+  renderSelected('give');
+  renderSelected('receive');
+  wireSearch(dom.giveInput, 'give');
+  wireSearch(dom.receiveInput, 'receive');
+  dom.analyzeBtn.addEventListener('click', analyzeTrade);
+  dom.clearTradeBtn.addEventListener('click', clearTrade);
+
+  try {
+    const items = await RoveraRoli.fetchItems();
+    dom.loadedItems.textContent = RoveraRoli.formatNumber(items.length);
+    dom.dataStatus.textContent = 'Live data ready';
+    renderQuickPicks();
+  } catch (error) {
+    dom.loadedItems.textContent = 'Offline';
+    dom.dataStatus.textContent = 'Data unavailable';
+    dom.resultPanel.innerHTML = `<div class="result-idle">RoliMon's item data could not be loaded. Refresh in a moment.</div>`;
+  }
+}
+
+initTradeChecker();
+
 let currentMode = 'signup';
 let pendingUser = null;
 let currentPhrase = '';
@@ -617,136 +1549,80 @@ function openModal(mode) {
   showStep('stepAuth');
   switchTab(mode || 'signup');
 }
-function closeModal() { document.getElementById('overlay').classList.remove('active'); }
-function overlayClick(e) { if (e.target === document.getElementById('overlay')) closeModal(); }
-
+function closeModal() {
+  document.getElementById('overlay').classList.remove('active');
+}
+function overlayClick(e) {
+  if (e.target === document.getElementById('overlay')) closeModal();
+}
 function showStep(id) {
-  ['stepAuth','stepRoblox','stepBio','stepEmail'].forEach(s => {
-    document.getElementById(s).classList.remove('active');
-  });
+  ['stepAuth','stepRoblox','stepBio','stepEmail'].forEach(s => document.getElementById(s).classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
-
 function switchTab(tab) {
   currentMode = tab;
-  document.getElementById('tabSignin').classList.toggle('active', tab==='signin');
-  document.getElementById('tabSignup').classList.toggle('active', tab==='signup');
-  document.getElementById('formSignin').style.display = tab==='signin' ? 'block' : 'none';
-  document.getElementById('formSignup').style.display = tab==='signup' ? 'block' : 'none';
+  document.getElementById('tabSignin').classList.toggle('active', tab === 'signin');
+  document.getElementById('tabSignup').classList.toggle('active', tab === 'signup');
+  document.getElementById('formSignin').style.display = tab === 'signin' ? 'block' : 'none';
+  document.getElementById('formSignup').style.display = tab === 'signup' ? 'block' : 'none';
 }
-
 function togglePw(id, btn) {
   const f = document.getElementById(id);
-  f.type = f.type==='password' ? 'text' : 'password';
-  btn.textContent = f.type==='password' ? '👁' : '🙈';
+  f.type = f.type === 'password' ? 'text' : 'password';
+  btn.textContent = f.type === 'password' ? 'show' : 'hide';
 }
 
-// ======= API =======
-function apiUrl() {
-  if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
-    return 'http://localhost:3000/roblox';
-  }
-  return '/roblox';
-}
-async function apiCall(action, payload) {
-  try {
-    const r = await fetch(apiUrl(), {
-      method: 'POST', headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({ action, ...payload })
-    });
-    if (!r.ok) return null;
-    const d = await r.json();
-    return d.error ? null : d;
-  } catch { return null; }
-}
-
-// ======= VISITOR TRACKING =======
-(async () => {
-  try {
-    await fetch(apiUrl(), {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ action: 'track', referrer: document.referrer || 'direct' })
-    });
-  } catch {}
-})();
-
-// ======= ROBLOX LOOKUP =======
 async function lookupRoblox(username) {
-  // 1. Try server-side proxy first
   const via = await apiCall('lookupUser', { username });
   if (via && via.id) return via;
 
-  // 2. Fallback: browser-side with multiple CORS proxies
-  const proxyList = [
-    async () => {
-      const r = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent('https://users.roblox.com/v1/usernames/users')}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ usernames: [username], excludeBannedUsers: false })
-      });
-      return r.ok ? r.json() : null;
-    },
-    async () => {
-      const r = await fetch(`https://corsproxy.io/?${encodeURIComponent('https://users.roblox.com/v1/usernames/users')}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ usernames: [username], excludeBannedUsers: false })
-      });
-      return r.ok ? r.json() : null;
-    },
-    async () => {
-      // Try GET search as last resort
-      const r = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(`https://www.roblox.com/search/users?keyword=${encodeURIComponent(username)}`)}`);
-      if (!r.ok) return null;
-      // Manually construct a partial user object from search
-      const r2 = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(`https://users.roblox.com/v1/users/search?keyword=${encodeURIComponent(username)}&limit=10`)}`);
-      if (!r2.ok) return null;
-      const d2 = await r2.json();
-      const match = d2.data?.find(u => u.name.toLowerCase() === username.toLowerCase());
-      if (!match) return null;
-      return { data: [{ id: match.id, name: match.name, displayName: match.displayName }] };
-    }
-  ];
-
-  for (const proxy of proxyList) {
+  try {
+    const r = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent('https://users.roblox.com/v1/usernames/users')}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ usernames: [username], excludeBannedUsers: false })
+    });
+    if (!r.ok) return null;
+    const d = await r.json();
+    if (!d.data || !d.data[0]) return null;
+    const u = d.data[0];
+    let avatar = null;
     try {
-      const d = await proxy();
-      if (!d || !d.data || !d.data[0]) continue;
-      const u = d.data[0];
-      // Get avatar
-      let avatar = null;
-      try {
-        const ar = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(`https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=${u.id}&size=150x150&format=Png`)}`);
-        if (ar.ok) { const ad = await ar.json(); avatar = ad.data?.[0]?.imageUrl || null; }
-      } catch {}
-      return { id: u.id, name: u.name, displayName: u.displayName, avatar };
+      const ar = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(`https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=${u.id}&size=150x150&format=Png`)}`);
+      if (ar.ok) {
+        const ad = await ar.json();
+        avatar = ad.data?.[0]?.imageUrl || null;
+      }
     } catch {}
+    return { id: u.id, name: u.name, displayName: u.displayName, avatar };
+  } catch {
+    return null;
   }
-  return null;
 }
 
 async function checkBio(userId) {
-  // 1. Try server-side
   const r = await apiCall('checkBio', { userId });
   if (r && r.bio !== undefined) return r.bio;
-
-  // 2. Fallback browser-side
   try {
     const res = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(`https://users.roblox.com/v1/users/${userId}`)}`);
     if (!res.ok) return null;
     const d = await res.json();
     return d.description || '';
-  } catch { return null; }
+  } catch {
+    return null;
+  }
 }
 
-// ======= PASSPHRASE =======
 const WORDS = ['alpha','bravo','charlie','delta','echo','foxtrot','golf','hotel','india','juliet','kilo','lima','mike','nova','oscar','papa','quebec','romeo','sierra','tango','ultra','victor','whisky','xray','yankee','zulu','blaze','comet','drift','ember','flare','ghost','haven','iron','jade','karma','lunar','mist','neon','orbit','prism','quest','ridge','solar','titan','umbra','vault','wave','xenon','yield'];
 function generatePhrase() {
   const words = [];
   const used = new Set();
   while (words.length < 7) {
     const w = WORDS[Math.floor(Math.random() * WORDS.length)];
-    if (!used.has(w)) { used.add(w); words.push(w); }
+    if (!used.has(w)) {
+      used.add(w);
+      words.push(w);
+    }
   }
   currentPhrase = words.join(' ');
   document.getElementById('phraseText').textContent = currentPhrase;
@@ -754,18 +1630,17 @@ function generatePhrase() {
 function copyPhrase() {
   navigator.clipboard.writeText(currentPhrase).then(() => {
     const btn = document.querySelector('.copy-btn');
-    btn.textContent = '✓';
-    setTimeout(() => btn.textContent = '⎘', 1500);
+    btn.textContent = 'copied';
+    setTimeout(() => btn.textContent = 'copy', 1500);
   });
 }
 
-// ======= SIGN UP — STEP 1 =======
 async function doSignup() {
   const username = document.getElementById('su-username').value.trim();
-  const email    = document.getElementById('su-email').value.trim();
-  const pw       = document.getElementById('su-password').value;
-  const pw2      = document.getElementById('su-password2').value;
-  const err      = document.getElementById('su-err');
+  const email = document.getElementById('su-email').value.trim();
+  const pw = document.getElementById('su-password').value;
+  const pw2 = document.getElementById('su-password2').value;
+  const err = document.getElementById('su-err');
   err.textContent = '';
 
   if (!username) { err.textContent = 'Enter your Roblox username.'; return; }
@@ -775,9 +1650,7 @@ async function doSignup() {
   if (!document.getElementById('agreeBox').checked) { err.textContent = 'You must agree to the Terms of Service.'; return; }
 
   showSpinner('su-err', 'Looking up Roblox account...');
-
   const user = await lookupRoblox(username);
-
   if (!user) {
     err.textContent = 'Could not find that Roblox username. Check and try again.';
     return;
@@ -789,10 +1662,9 @@ async function doSignup() {
     robloxId: user.id,
     avatar: user.avatar,
     password: btoa(pw),
-    email: email
+    email
   };
 
-  // Show roblox confirm card
   document.getElementById('robloxAvatar').src = user.avatar || 'logo.png';
   document.getElementById('robloxName').textContent = user.displayName || user.name;
   document.getElementById('robloxHandle').textContent = '@' + user.name;
@@ -802,9 +1674,7 @@ async function doSignup() {
   showStep('stepRoblox');
 }
 
-// ======= STEP 2: CONFIRM ROBLOX =======
 function confirmRoblox() {
-  // Move to bio verify
   generatePhrase();
   if (pendingUser.robloxId) {
     document.getElementById('openRobloxBtn').href = `https://www.roblox.com/users/${pendingUser.robloxId}/profile`;
@@ -813,27 +1683,23 @@ function confirmRoblox() {
   showStep('stepBio');
 }
 
-// ======= STEP 3: BIO VERIFY =======
 async function doBioVerify() {
   const err = document.getElementById('bio-err');
   const btn = document.getElementById('bioVerifyBtn');
   showSpinner('bio-err', 'Scanning your Roblox bio...');
   btn.disabled = true;
-
   const bio = await checkBio(pendingUser.robloxId);
   btn.disabled = false;
 
   if (bio === null) { err.textContent = 'Could not reach Roblox. Try again.'; return; }
   if (!bio.includes(currentPhrase)) {
-    err.textContent = 'Passphrase not found in your bio. Copy it exactly and save!';
+    err.textContent = 'Passphrase not found in your bio. Copy it exactly and save.';
     return;
   }
 
-  // Bio verified — send email code
   err.textContent = '';
   showSpinner('bio-err', 'Sending verification code...');
   btn.disabled = true;
-
   const result = await apiCall('sendCode', { email: pendingUser.email, username: pendingUser.username });
   btn.disabled = false;
 
@@ -842,33 +1708,31 @@ async function doBioVerify() {
     return;
   }
 
-  // Show email step
   document.getElementById('sentEmailDisplay').textContent = pendingUser.email;
   document.getElementById('email-err').textContent = '';
   clearCodeBoxes();
   showStep('stepEmail');
-  // Focus first box
   setTimeout(() => document.querySelector('.code-box').focus(), 100);
 }
 
-// ======= STEP 4: EMAIL CODE VERIFY =======
 function getCode() {
   return Array.from(document.querySelectorAll('.code-box')).map(b => b.value).join('');
 }
 function clearCodeBoxes() {
-  document.querySelectorAll('.code-box').forEach(b => { b.value = ''; b.classList.remove('filled'); });
+  document.querySelectorAll('.code-box').forEach(b => {
+    b.value = '';
+    b.classList.remove('filled');
+  });
 }
 
 async function doCodeVerify() {
   const code = getCode();
   const err = document.getElementById('email-err');
   const btn = document.getElementById('codeVerifyBtn');
-
   if (code.length < 6) { err.textContent = 'Enter the full 6-digit code.'; return; }
 
   showSpinner('email-err', 'Verifying...');
   btn.disabled = true;
-
   const result = await apiCall('verifyCode', { email: pendingUser.email, code });
   btn.disabled = false;
 
@@ -877,7 +1741,6 @@ async function doCodeVerify() {
     return;
   }
 
-  // Save user to localStorage
   const users = JSON.parse(localStorage.getItem('rovera_users') || '{}');
   users[pendingUser.username.toLowerCase()] = {
     username: pendingUser.username,
@@ -885,7 +1748,7 @@ async function doCodeVerify() {
     robloxId: pendingUser.robloxId,
     avatar: pendingUser.avatar,
     email: pendingUser.email,
-    password: pendingUser.password,
+    password: pendingUser.password
   };
   localStorage.setItem('rovera_users', JSON.stringify(users));
   loginSuccess(users[pendingUser.username.toLowerCase()]);
@@ -898,13 +1761,12 @@ async function resendCode() {
   if (!result || !result.sent) {
     err.textContent = 'Could not resend. Try again.';
   } else {
-    err.innerHTML = '<span style="color:#5bc4ff">Code resent!</span>';
+    err.innerHTML = '<span style="color:#5bc4ff">Code resent.</span>';
     clearCodeBoxes();
     setTimeout(() => document.querySelector('.code-box').focus(), 100);
   }
 }
 
-// ======= CODE BOX NAVIGATION =======
 document.addEventListener('DOMContentLoaded', () => {
   const boxes = document.querySelectorAll('.code-box');
   boxes.forEach((box, i) => {
@@ -912,21 +1774,24 @@ document.addEventListener('DOMContentLoaded', () => {
       const val = e.target.value.replace(/\D/g, '');
       e.target.value = val;
       e.target.classList.toggle('filled', val !== '');
-      if (val && i < boxes.length - 1) boxes[i+1].focus();
+      if (val && i < boxes.length - 1) boxes[i + 1].focus();
       if (getCode().length === 6) doCodeVerify();
     });
     box.addEventListener('keydown', e => {
       if (e.key === 'Backspace' && !box.value && i > 0) {
-        boxes[i-1].value = '';
-        boxes[i-1].classList.remove('filled');
-        boxes[i-1].focus();
+        boxes[i - 1].value = '';
+        boxes[i - 1].classList.remove('filled');
+        boxes[i - 1].focus();
       }
     });
     box.addEventListener('paste', e => {
       e.preventDefault();
       const paste = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g, '').slice(0, 6);
       paste.split('').forEach((ch, idx) => {
-        if (boxes[idx]) { boxes[idx].value = ch; boxes[idx].classList.add('filled'); }
+        if (boxes[idx]) {
+          boxes[idx].value = ch;
+          boxes[idx].classList.add('filled');
+        }
       });
       if (paste.length === 6) doCodeVerify();
       else if (boxes[paste.length]) boxes[paste.length].focus();
@@ -934,20 +1799,17 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// ======= SIGN IN =======
 async function doSignin() {
   const username = document.getElementById('si-username').value.trim();
-  const pw       = document.getElementById('si-password').value;
-  const err      = document.getElementById('si-err');
+  const pw = document.getElementById('si-password').value;
+  const err = document.getElementById('si-err');
   err.textContent = '';
 
   if (!username || !pw) { err.textContent = 'Fill in all fields.'; return; }
-
   const users = JSON.parse(localStorage.getItem('rovera_users') || '{}');
   const u = users[username.toLowerCase()];
   if (!u) { err.textContent = 'Account not found.'; return; }
   if (u.password !== btoa(pw)) { err.textContent = 'Wrong password.'; return; }
-
   loginSuccess(u);
 }
 
@@ -973,10 +1835,10 @@ async function forgotPassword() {
   setTimeout(() => document.querySelector('.code-box').focus(), 100);
 }
 
-// ======= LOGIN STATE =======
 function loginSuccess(user) {
   closeModal();
   document.getElementById('loginBtn').style.display = 'none';
+  document.getElementById('profileBtn').textContent = 'Profile';
   const chip = document.getElementById('userChip');
   chip.style.display = 'flex';
   document.getElementById('chipAvatar').src = user.avatar || 'logo.png';
@@ -990,9 +1852,13 @@ function logout() {
   document.getElementById('userChip').style.display = 'none';
 }
 
-// Auto-login
 const session = localStorage.getItem('rovera_session');
-if (session) { try { loginSuccess(JSON.parse(session)); } catch(e) {} }
+if (session) {
+  try {
+    loginSuccess(JSON.parse(session));
+  } catch {}
+}
 </script>
+<script src="/loader.js"></script>
 </body>
 </html>

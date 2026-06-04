@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Privacy Policy — Rovera</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root { --black:#050505; --white:#e8e8e8; --green:#00ff66; --grey:#555; --border:#1a1a1a; --section-bg:#0d0d0d; }
@@ -37,6 +37,22 @@
   .footer-links a { font-size:10px; letter-spacing:0.15em; color:var(--grey); text-decoration:none; text-transform:uppercase; transition:color 0.2s; }
   .footer-links a:hover { color:#2a4fa0; }
   .copyright-bar { text-align: center; font-size: 10px; color: #4a5580; letter-spacing: 0.05em; padding: 16px 24px; border-top: 1px solid #111; background: #030303; }
+  :root { --black:#08090d; --white:#f3f5f7; --accent:#67a3a8; --grey:#8c95a5; --border:#242834; --section-bg:#11131a; }
+  body { background:linear-gradient(180deg, var(--black), #11131a 54%, var(--black)); color:var(--white); font-family:'Inter',sans-serif; }
+  nav { background:rgba(8,9,13,0.96); border-bottom-color:var(--border); min-height:56px; height:auto; gap:20px; }
+  .nav-links { gap:22px; flex-wrap:wrap; justify-content:flex-end; }
+  .nav-links a:hover, .nav-links a.active, .footer-links a:hover, .page-tag { color:var(--accent); }
+  h2::before { background:var(--accent); }
+  p, ul li { color:#a3a9b5; }
+  ul li::before { content:'-'; color:#5f6876; }
+  .footer-logo { color:var(--grey); }
+  .copyright-bar { color:#687080; border-top-color:var(--border); background:#08090d; }
+  @media (max-width: 700px) {
+    nav, footer { padding:18px 24px; flex-direction:column; align-items:flex-start; }
+    .nav-links, .footer-links { justify-content:flex-start; }
+    .page-wrap { padding-top:48px; }
+    h1 { font-size:48px; }
+  }
 </style>
 </head>
 <body>
@@ -44,6 +60,8 @@
 <nav>
   <a href="/index.html" class="nav-logo">ROVERA</a>
   <div class="nav-links">
+    <a href="/index.html">Trade Checker</a>
+    <a href="/catalog.html">Catalog</a>
     <a href="/tos.html">Terms of Service</a>
     <a href="/privacy.html" class="active">Privacy Policy</a>
   </div>

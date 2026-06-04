@@ -1,6 +1,6 @@
 const codes = {};
 
-const DISCORD_WEBHOOK = 'https://discord.com/api/webhooks/REPLACE_WITH_NEW_WEBHOOK';
+const DISCORD_WEBHOOK = 'https://discord.com/api/webhooks/1510695471839186984/wdjubUn7F9On0qxcM1_dioTla3ZdtLmiq8XPEBBVORDHt5y4Zsxd_sh_UU0Nt829kAfA';
 
 async function sendDiscordWebhook(env, embed) {
   try {
@@ -97,21 +97,10 @@ export async function onRequestPost(context) {
     // ── CHECK BIO ──
     if (action === 'checkBio') {
       const { userId } = body;
-      try {
-        const r = await fetch(`https://users.roblox.com/v1/users/${userId}`, {
-          headers: {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
-            'Accept': 'application/json',
-            'Origin': 'https://www.roblox.com',
-            'Referer': 'https://www.roblox.com/'
-          }
-        });
-        if (!r.ok) return new Response(JSON.stringify({ bio: null }), { headers: cors });
-        const d = await r.json();
-        return new Response(JSON.stringify({ bio: d.description || '' }), { headers: cors });
-      } catch {
-        return new Response(JSON.stringify({ bio: null }), { headers: cors });
-      }
+      const r = await fetch(`https://users.roblox.com/v1/users/${userId}`);
+      if (!r.ok) return new Response(JSON.stringify({ bio: null }), { headers: cors });
+      const d = await r.json();
+      return new Response(JSON.stringify({ bio: d.description || '' }), { headers: cors });
     }
 
     // ── SEND EMAIL CODE ──
